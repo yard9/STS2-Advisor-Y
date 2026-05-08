@@ -4,6 +4,8 @@ Browser tool for Slay the Spire 2 that helps evaluate card rewards, shop buys an
 
 Still **early access** and the logic isn't perfect yet - feedback and issue reports are welcome.
 
+> **Fork note (May 7 2026):** Card and relic data synced through STS2 beta **v0.104.0** (Apr 24 2026). Main-branch state corresponds to **v0.103.2**. See [CHANGELOG.md](./CHANGELOG.md) for the full per-patch breakdown.
+
 ---
 
 ## What it does

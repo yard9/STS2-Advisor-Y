@@ -138,24 +138,6 @@ const DB = {
         ],
         "role": "engine"
       },
-      "GRAPPLE": {
-        "id": "Grapple",
-        "tier": "A",
-        "builds": [
-          "block"
-        ],
-        "syn": [
-          "block",
-          "damage",
-          "scaling"
-        ],
-        "anti": [],
-        "notes": "Converts Block to damage. Makes block builds threatening. S-tier in Barricade decks.",
-        "mech": [
-          "block_conversion"
-        ],
-        "role": "payoff"
-      },
       "COLOSSUS": {
         "id": "Colossus",
         "tier": "S",
@@ -170,13 +152,14 @@ const DB = {
           "strike"
         ],
         "anti": [],
-        "notes": "New STS2 card. Strong permanent scaling for block/strength builds.",
+        "notes": "[Rarity Rare → Uncommon, v0.103.0] New STS2 card. Strong permanent block/strength scaling, now appears in normal card rewards instead of just rare slots — much more accessible.",
         "mech": [
           "permanent_scaling",
           "strike",
           "block"
         ],
-        "role": "defense"
+        "role": "defense",
+        "rarity": "uncommon"
       },
       "UNMOVABLE": {
         "id": "Unmovable",
@@ -200,19 +183,19 @@ const DB = {
       },
       "EXPECT_A_FIGHT": {
         "id": "Expect A Fight",
-        "tier": "S",
+        "tier": "A",
         "builds": [
-          "strike"
+          "any"
         ],
         "syn": [
-          "damage",
-          "draw",
-          "scaling",
-          "strike",
-          "energy_gain"
+          "energy_gain",
+          "attack_density",
+          "draw"
         ],
-        "anti": [],
-        "notes": "Excellent Strike support. Extra Energy helps play Perfected Strike and attack chains in the same turn.",
+        "anti": [
+          "exhaust_heavy"
+        ],
+        "notes": "[Reworked v0.100.0] Cost 2(1) Skill, Uncommon: Gain Energy for each Attack in Hand. You cannot gain additional Energy this turn. Closes off most Ironclad infinite loops; still excellent burst energy with attack-dense hands.",
         "mech": [
           "energy_gain",
           "conditional",
@@ -231,7 +214,7 @@ const DB = {
           "scaling"
         ],
         "anti": [],
-        "notes": "Block persists. Stack massive defense. Combines with Juggernaut, Body Slam, Grapple.",
+        "notes": "Block persists. Stack massive defense. Combines with Juggernaut and Body Slam.",
         "mech": [
           "block_retain"
         ],
@@ -455,11 +438,11 @@ const DB = {
           "blood"
         ],
         "anti": [],
-        "notes": "Draw a card when you lose HP. Pairs with Bloodletting for explosive turns.",
+        "notes": "[Reworked v0.100.0] 0-cost Attack, Uncommon: Deal 5 dmg, hits 2(3) times if you lost HP this turn. Free 10+ dmg in self-damage decks (Bloodletting/Rupture/Brand).",
         "mech": [
           "self_damage_payoff",
-          "draw",
-          "blood"
+          "damage",
+          "multi_hit"
         ],
         "role": "payoff"
       },
@@ -617,10 +600,10 @@ const DB = {
           "strength",
           "self_damage"
         ],
-        "notes": "Exhaust synergy. Strong in exhaust-based builds.",
+        "notes": "[Reworked v0.100.0] 1-cost Skill, Rare: Exhaust your Hand. Add 1 random (Upgraded) card to Hand for each card Exhausted. Massive Exhaust payoff trigger; use after dumping value or to reset bricks.",
         "mech": [
           "exhaust",
-          "damage"
+          "card_generation"
         ],
         "role": "engine"
       },
@@ -637,7 +620,7 @@ const DB = {
           "blood"
         ],
         "anti": [],
-        "notes": "High damage at HP cost. Pairs with Rupture/Bloodletting. Good elite killer.",
+        "notes": "High damage at HP cost. Pairs with Rupture/Bloodletting. Good elite killer. [Buffed v0.100.0] Damage 14(19)→15(20).",
         "mech": [
           "self_damage",
           "damage",
@@ -1690,7 +1673,7 @@ const DB = {
           "strike"
         ],
         "anti": [],
-        "notes": "Strength generator attached to multi-hit damage. Strong in Strength and Strike shells, but the enemy Strength matters in longer fights.",
+        "notes": "Strength generator attached to multi-hit damage. Strong in Strength and Strike shells, but the enemy Strength matters in longer fights. [Buffed v0.100.0] Self-Strength gain 2(3)→3(4).",
         "mech": [
           "damage",
           "multi_hit",
@@ -1704,21 +1687,24 @@ const DB = {
         "id": "Conflagration",
         "tier": "A",
         "builds": [
-          "strike"
+          "aoe",
+          "strength",
+          "vulnerable"
         ],
         "syn": [
-          "damage",
           "aoe",
-          "attack_chain",
-          "strike"
+          "multi_hit",
+          "strength",
+          "vulnerable",
+          "pen_nib",
+          "akabeko"
         ],
         "anti": [],
-        "notes": "Attack-chain AoE finisher. Much stronger after you have already played other attacks this turn.",
+        "notes": "[Reworked v0.104.0] 1-cost Rare Attack: Deal 2 damage to ALL enemies 4(5) times. Multi-hit AoE — scales hard with Strength, Vulnerable, and per-hit relics (Pen Nib, Akabeko). No longer cares about other Attacks played this turn.",
         "mech": [
-          "damage",
           "aoe",
-          "per_attack_payoff",
-          "strike"
+          "multi_hit",
+          "damage"
         ],
         "role": "payoff"
       },
@@ -1757,7 +1743,7 @@ const DB = {
           "block",
           "self_damage"
         ],
-        "notes": "17 damage + exhausts the top card of your draw pile randomly. In exhaust builds that's free value — damage AND triggers Dark Embrace/Feel No Pain/Charon's Ashes. Outside exhaust builds, skip — random exile of your best card is too risky.",
+        "notes": "[Updated v0.101.0] 18 damage + Exhausts a random card in your Hand (was the top of your Draw Pile). Far less of a gamble; still feeds Exhaust payoffs (Dark Embrace, Feel No Pain, Charon's Ashes).",
         "mech": [
           "damage",
           "exhaust"
@@ -1824,11 +1810,12 @@ const DB = {
           "exhaust",
           "block"
         ],
-        "notes": "Apply 2 Vulnerable. 0 cost setup card. Enables Ironclad Vulnerable payoffs and amplifies big Strike nukes like Perfected Strike.",
+        "notes": "[Buffed v0.100.0; Exhaust added v0.101.0] Apply 3(4) Vulnerable, now Exhausts. Stronger setup but one-shot — fits better in most decks since Vulnerable rarely needs to repeat.",
         "mech": [
           "vulnerable",
           "debuff",
-          "zero_cost"
+          "zero_cost",
+          "exhaust"
         ],
         "role": "generator"
       },
@@ -1882,17 +1869,19 @@ const DB = {
         "syn": [
           "strength",
           "vulnerable",
+          "exhaust",
           "scaling"
         ],
         "anti": [
           "exhaust",
           "block"
         ],
-        "notes": "Gain 1 Strength for each Vulnerable on the enemy. Exhaust. Converts Vulnerable stacks directly into permanent Strength — use after stacking 3+ Vulnerable for a big burst of scaling. Once per fight but the Strength is permanent. Essential in Vulnerable-into-Strength builds for boss fights.",
+        "notes": "[Reworked v0.100.0] 1-cost Skill, Uncommon: Apply 1(2) Vulnerable, then gain 1 Strength per Vulnerable on the enemy, Exhaust. Strong in Vulnerable-stacking decks (Tremble, Bully, Uppercut). Beware enemies with Artifact.",
         "mech": [
           "strength",
-          "vulnerable_payoff",
-          "exhaust"
+          "vulnerable_apply",
+          "exhaust",
+          "scaling"
         ],
         "role": "generator"
       },
@@ -1900,23 +1889,26 @@ const DB = {
         "id": "Drum of Battle",
         "tier": "C",
         "builds": [
-          "exhaust"
+          "exhaust",
+          "any"
         ],
         "syn": [
-          "exhaust",
           "draw",
-          "scaling"
+          "exhaust",
+          "energy_gain",
+          "feel_no_pain",
+          "dark_embrace"
         ],
         "anti": [
           "strength",
           "block",
           "self_damage"
         ],
-        "notes": "Draw 2 on play, then passively exhausts top card of draw pile every turn start. In exhaust builds this is a free trigger every turn — fires Dark Embrace, Feel No Pain, Charon's Ashes, Forgotten Ritual all passively. Outside exhaust builds the random exile of your best cards is genuinely dangerous.",
+        "notes": "[Reworked v0.104.0] 1-cost Uncommon Skill (was 0-cost Power): Draw 2 cards. When Exhausted, gain 2(3) Energy. Pivots out of the unloved Power slot into a real Exhaust-archetype payoff.",
         "mech": [
           "draw",
           "exhaust",
-          "passive"
+          "energy_gain"
         ],
         "role": "engine"
       },
@@ -1936,7 +1928,7 @@ const DB = {
           "block",
           "self_damage"
         ],
-        "notes": "If you Exhausted a card this turn, gain 3 energy — free, no cost. With Corruption making every skill exhaust, this is guaranteed 3 free energy every turn. Foundational to Ironclad infinite loops. One of the key reasons exhaust builds can chain turns indefinitely.",
+        "notes": "[Nerfed v0.100.0] Now Exhausts. If you Exhausted a card this turn, gain 3 Energy. The Exhaust closes the most egregious Ironclad infinite loops, but it's still strong as a one-shot turn-burster in Exhaust decks.",
         "mech": [
           "energy_gain",
           "exhaust",
@@ -2134,6 +2126,28 @@ const DB = {
           "self_damage_payoff"
         ],
         "role": "payoff"
+      },
+      "NOT_YET": {
+        "id": "Not Yet",
+        "tier": "B",
+        "builds": [
+          "any",
+          "self_damage",
+          "exhaust"
+        ],
+        "syn": [
+          "healing",
+          "exhaust",
+          "self_damage",
+          "blood"
+        ],
+        "anti": [],
+        "notes": "[Added v0.103.0] Rare Skill, Cost 2: Heal 10(13) HP, Exhaust. Panic-button heal that also fuels self-damage payoffs (Bloodletting/Rupture/Spite) and Exhaust synergies (Feel No Pain, Dark Embrace).",
+        "mech": [
+          "heal",
+          "exhaust"
+        ],
+        "role": "utility"
       }
     },
     "silent": {
@@ -2511,13 +2525,14 @@ const DB = {
           "discard"
         ],
         "anti": [],
-        "notes": "Draw 3, discard 1. Excellent cycling and Sly enabler.",
+        "notes": "[Rarity Common → Uncommon, v0.103.0] 1-cost Skill: Draw 3 cards, Discard 1. Still elite draw, but harder to pick up in card rewards now — Mega Crit's first lever to bring Sly under control.",
         "mech": [
           "draw",
           "discard",
           "sly_enabler"
         ],
-        "role": "generator"
+        "role": "generator",
+        "rarity": "uncommon"
       },
       "PREPARED": {
         "id": "Prepared",
@@ -2532,7 +2547,7 @@ const DB = {
           "discard"
         ],
         "anti": [],
-        "notes": "Draw 1, discard 1 (0-cost). Efficient Sly trigger.",
+        "notes": "[v0.100.0 rework reverted in v0.101.0] Back to launch state: 0-cost Common Skill — Draw 1 card, Discard 1 card. Devs note Sly is still strong; future nerfs will target it indirectly.",
         "mech": [
           "draw",
           "discard",
@@ -2824,7 +2839,7 @@ const DB = {
           "scaling"
         ],
         "anti": [],
-        "notes": "X-cost attack. Good energy dump.",
+        "notes": "X-cost attack. Good energy dump. [Buffed v0.100.0] Damage 7(10)→8(11).",
         "mech": [
           "damage",
           "scaling"
@@ -2845,7 +2860,7 @@ const DB = {
           "tracking_synergy"
         ],
         "anti": [],
-        "notes": "Deal 6 damage to ALL enemies. If the last card you played this turn was a Skill, apply 1 Weak to ALL enemies. Consistent AoE Weak application in Skill-heavy builds. Synergizes with Tracking — apply Weak then Tracking doubles all attack damage.",
+        "notes": "[Reworked v0.103.0] If you have 5+ other cards in Hand, hits a 2nd time (full second hit, double-procs Akabeko/Shuriken etc.). Need 6 cards total in hand to trigger.",
         "mech": [
           "damage",
           "aoe",
@@ -2945,7 +2960,7 @@ const DB = {
           "poison",
           "shiv"
         ],
-        "notes": "Sly AoE.",
+        "notes": "Sly AoE. [Nerfed v0.100.0] Damage 7(9)→6(8).",
         "mech": [
           "sly",
           "damage",
@@ -2955,7 +2970,7 @@ const DB = {
       },
       "UNTOUCHABLE": {
         "id": "Untouchable",
-        "tier": "A",
+        "tier": "B",
         "builds": [
           "sly"
         ],
@@ -2967,7 +2982,7 @@ const DB = {
           "poison",
           "shiv"
         ],
-        "notes": "Sly block.",
+        "notes": "[Nerfed v0.100.0+v0.102.0; small upgrade buff v0.104.0] Block now 6(8) (was 9(12)). Still solid Sly intangible-block, but no longer warps the format. Upgrade now adds +3 Block (was +2).",
         "mech": [
           "sly",
           "block"
@@ -3029,7 +3044,7 @@ const DB = {
           "combo_enabler"
         ],
         "anti": [],
-        "notes": "Choose a card. Next turn, add 3 copies of that card into your Hand. Exhaust. Triple a key card — 3x Accelerant means Poison triggers 4 times per turn, 3x Reflex draws 6 cards for free, 3x Tactician gives 3 free energy, 3x Wraith Form = 6 turns of Intangible.",
+        "notes": "[Clarified v0.104.0] If the chosen card has an Affliction, it is removed from the copies added to your Hand next turn. Closes a Nightmare-laundering exploit.",
         "mech": [],
         "role": "engine"
       },
@@ -3091,7 +3106,7 @@ const DB = {
           "shiv",
           "sly"
         ],
-        "notes": "Nearly impossible to trigger consistently.",
+        "notes": "Nearly impossible to trigger consistently. [Buffed v0.100.0] Damage 50(60)→60(75).",
         "mech": [],
         "role": "payoff"
       },
@@ -3219,7 +3234,7 @@ const DB = {
           "scaling"
         ],
         "anti": [],
-        "notes": "Gain 3 Dexterity this turn. Temporary burst defense — 3 Dex with several block cards in hand is huge. Excellent with Footwork already active since the two stack. Best in turns where you're playing many block cards.",
+        "notes": "Gain 3 Dexterity this turn. Temporary burst defense — 3 Dex with several block cards in hand is huge. Excellent with Footwork already active since the two stack. Best in turns where you're playing many block cards. [Nerfed v0.100.0] Dexterity 3(5)→2(3).",
         "mech": [
           "dexterity",
           "temporary",
@@ -3315,7 +3330,7 @@ const DB = {
           "poison",
           "sly"
         ],
-        "notes": "Deal 7 damage. Add 1 Shiv to your Hand. Shiv build support — deals solid damage while generating a Shiv that immediately benefits from Accuracy. The Shiv also triggers Envenom and After Image when played.",
+        "notes": "[Reworked v0.102.0] Now generates 2 Shivs (was 1) but front damage 7→4. Pushed harder toward Shiv decks; less generic for non-Shiv builds.",
         "mech": [
           "damage",
           "shiv_generator"
@@ -3465,24 +3480,27 @@ const DB = {
         "id": "Blade Of Ink",
         "tier": "D",
         "builds": [
-          "shiv"
+          "shiv",
+          "sly"
         ],
         "syn": [
-          "shiv_synergy",
-          "damage",
-          "strength"
+          "shiv",
+          "weak",
+          "accuracy",
+          "infinite_blades",
+          "after_image"
         ],
         "anti": [
           "poison",
           "sly"
         ],
-        "notes": "This turn, whenever you play an Attack, gain 2 Strength this turn. Temporary Strength per attack — in a 10-Shiv turn that's 20 temporary Strength boosting all hits. Highly conditional and build-specific, fades at turn end.",
+        "notes": "[Reworked v0.102.0] 1-cost Skill: Add 2 Inky Shivs to Hand (Inky = Shiv + 2 dmg + apply 1 Weak). Major Shiv payoff & Weak applier; no longer grants temporary Strength.",
         "mech": [
-          "strength",
-          "temporary",
-          "per_attack_payoff"
+          "shiv_generate",
+          "weak",
+          "card_generation"
         ],
-        "role": "generator"
+        "role": "engine"
       },
       "BULLET_TIME": {
         "id": "Bullet Time",
@@ -3519,7 +3537,7 @@ const DB = {
           "aoe"
         ],
         "anti": [],
-        "notes": "Whenever you draw a card this turn, apply 3 Poison to ALL enemies. Draw 4 cards in one turn = 12 Poison to all enemies for free. Stacks explosively with Acrobatics, Expertise, Backflip. Natural fit in draw-heavy Sly builds doubling as Poison AoE.",
+        "notes": "Whenever you draw a card this turn, apply 3 Poison to ALL enemies. Draw 4 cards in one turn = 12 Poison to all enemies for free. Stacks explosively with Acrobatics, Expertise, Backflip. Natural fit in draw-heavy Sly builds doubling as Poison AoE. [Nerfed v0.100.0] Poison 3(4)→2(3).",
         "mech": [
           "poison",
           "aoe",
@@ -3605,7 +3623,7 @@ const DB = {
           "passive"
         ],
         "anti": [],
-        "notes": "Whenever you play a card, deal 4 damage to a random enemy. In high-card Sly or Shiv turns: 8 cards played = 32 passive damage. Hits random enemies so unreliable in multi-enemy, but in single-target fights it adds up quickly.",
+        "notes": "[Buffed v0.101.0] Whenever you play a card, deal 4(6) damage to a random enemy. With high-card Sly/Shiv turns: 8 cards played = 32-48 passive damage.",
         "mech": [
           "damage",
           "passive",
@@ -3771,7 +3789,7 @@ const DB = {
           "poison",
           "shiv"
         ],
-        "notes": "Deal 8 damage. Deals 4 additional damage for each card discarded this turn. In a Sly turn with 5 discards = 28 total damage for 1 energy. Scales with discard volume.",
+        "notes": "Deal 8 damage. Deals 4 additional damage for each card discarded this turn. In a Sly turn with 5 discards = 28 total damage for 1 energy. Scales with discard volume. [Buffed v0.103.0] Base damage increased.",
         "mech": [
           "damage",
           "per_discard_payoff"
@@ -3834,7 +3852,7 @@ const DB = {
           "skills_in_hand"
         ],
         "anti": [],
-        "notes": "Deal 17 damage. Costs 1 less for each Skill played this turn. After 3 Skills played costs 0 for 17 damage. In Sly turns playing many Skills this can be free repeatedly.",
+        "notes": "Deal 17 damage. Costs 1 less for each Skill played this turn. After 3 Skills played costs 0 for 17 damage. In Sly turns playing many Skills this can be free repeatedly. [Nerfed v0.100.0] Damage 17(22)→15(19).",
         "mech": [
           "damage",
           "cost_reduction",
@@ -3898,7 +3916,7 @@ const DB = {
           "sly"
         ],
         "anti": [],
-        "notes": "Whenever you draw a card during your turn, deal 2 damage to ALL enemies. Silent draws constantly — Acrobatics draws 3 (6 AoE), Expertise draws 4+ (8+ AoE). In full draw turns this is massive passive AoE.",
+        "notes": "[Nerfed v0.102.0] Per-card damage 2(3) → 1(2). Still a workable scaling attack, but pacing brake — needs more cards-played to hit the same numbers.",
         "mech": [
           "passive",
           "aoe",
@@ -4875,9 +4893,10 @@ const DB = {
         ],
         "anti": [],
         "mech": [
-          "focus"
+          "focus",
+          "exhaust"
         ],
-        "notes": "Gain 2 Focus this turn. C-tier — temporary Focus only lasts 1 turn. Better than nothing early, replaced by Defragment and Synchronize."
+        "notes": "[Nerfed v0.100.0] Now has Exhaust. Gain 2 Focus this turn. Upgrade now removes Exhaust instead of increasing Focus."
       },
       "LEAP": {
         "id": "Leap",
@@ -5214,7 +5233,7 @@ const DB = {
           "cost_reduce",
           "status_synergy"
         ],
-        "notes": "Deal 13 damage. Draw 1 card. Reduces to 0 when a Status is created this turn. C-tier — in Status builds where Gunk Up, TURBO, Boost Away generate Status, this becomes free damage plus draw."
+        "notes": "[Buffed v0.100.0] Cost reduction now lasts until played (was end of turn). 13 damage, draw 1, free if a Status was created this turn — now usable across turns."
       },
       "SCAVENGE": {
         "id": "Scavenge",
@@ -5710,7 +5729,7 @@ const DB = {
           "lightning",
           "exhaust"
         ],
-        "notes": "Channel Lightning equal to total Lightning Channeled this combat. Exhaust. B-tier — late in Orb builds where you've Channeled 10-20 Lightning, this floods all Orb slots with Lightning for massive passive damage the rest of the fight."
+        "notes": "[Nerfed v0.101.0] Energy cost 2→3. Channel Lightning equal to total Lightning Channeled this combat, Exhaust. Now a definitive finisher rather than a mid-combat splash."
       },
       "QUADCAST": {
         "id": "Quadcast",
@@ -5783,7 +5802,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Gain 1 Star, draw 2 cards. The backbone common — engine without needing a rare.",
+        "notes": "[Reworked v0.100.0] 1-cost Common Skill: Gain 1(2) Stars. Draw 1 card. Next turn, draw 1 card. Front-load + delayed draw.",
         "mech": [
           "star_gain",
           "draw"
@@ -5853,10 +5872,11 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "End turn. First 2 cards each turn cost 0 energy. Bends turn economy — one of the strongest powers.",
+        "notes": "End turn. First 2 cards each turn cost 0 energy. Bends turn economy — one of the strongest powers. [Changed v0.100.0] Now Ethereal; upgrade now removes Ethereal (was +1 card).",
         "mech": [
           "zero_cost_enabler",
-          "energy_gain"
+          "energy_gain",
+          "ethereal"
         ],
         "role": "engine"
       },
@@ -5875,7 +5895,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Gain 17 Block. Blocked damage reflects back to attacker. Offense AND defense in one.",
+        "notes": "[Nerfed v0.104.0] 13 Block (was 14). Reflects blocked attack damage to attacker. Still a strong reflect-block tool, no longer auto-include.",
         "mech": [
           "block",
           "damage",
@@ -6193,7 +6213,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Gain 2 Energy — one of the few pure Energy cards Regent has. Vital in Star-heavy builds for playing expensive payoffs.",
+        "notes": "Gain 2 Energy — one of the few pure Energy cards Regent has. Vital in Star-heavy builds for playing expensive payoffs. [Nerfed v0.100.0] Star cost 2→3.",
         "mech": [
           "energy_gain",
           "zero_cost"
@@ -6304,7 +6324,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Block + 1 star. Role-player: block + incidental star generation.",
+        "notes": "Block + 1 star. Role-player: block + incidental star generation. [Buffed v0.100.0] Block 7(10)→8(11).",
         "mech": [
           "block",
           "star_gain"
@@ -6325,7 +6345,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Damage + 1 star. Efficient and flexible.",
+        "notes": "Damage + 1 star. Efficient and flexible. [Buffed v0.100.0] Damage 8(9)→9(10).",
         "mech": [
           "damage",
           "star_gain"
@@ -6370,7 +6390,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Damage + draw 2 next turn. Consistent delayed draw.",
+        "notes": "[Buffed v0.101.0] Damage + draw cards immediately (was next turn). Much better tempo.",
         "mech": [
           "damage",
           "draw"
@@ -6457,7 +6477,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "Draw 1 and Exhaust 1 each turn. Passive deck thinner and draw engine. Very good in Sly-adjacent Regent builds.",
+        "notes": "[Interaction fix v0.104.0] At start of turn, draw 1 and Exhaust 1 from Hand. Now triggers BEFORE Bombardment, so a Bombardment Exhausted by Tyranny will be played that same turn.",
         "mech": [
           "exhaust",
           "deck_thin"
@@ -6523,7 +6543,7 @@ const DB = {
           "block",
           "strength"
         ],
-        "notes": "Gain 8 Block plus 2 Vigor (temporary Strength this turn). Solid early card."
+        "notes": "Gain 8 Block plus 2 Vigor (temporary Strength this turn). Solid early card. [Buffed v0.100.0] Block 8(10)→9(11)."
       },
       "CELESTIAL_MIGHT": {
         "id": "Celestial Might",
@@ -6540,7 +6560,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "6 damage 3 times. Multi-hit synergizes with Monarch's Gaze and Terraforming. Good with Strength scaling.",
+        "notes": "[Reworked upgrade v0.101.0] 6 damage 3 times; upgrade now grants 1 additional hit (was +2 damage). Multi-hit synergizes with Monarch's Gaze, Terraforming, and per-hit relics.",
         "mech": [
           "damage",
           "multi_hit",
@@ -6719,7 +6739,7 @@ const DB = {
           "colorless"
         ],
         "anti": [],
-        "notes": "Adds 3 random Colorless cards then Exhausts. Too random to reliably build around.",
+        "notes": "Adds 3 random Colorless cards then Exhausts. Too random to reliably build around. [Buffed v0.100.0] Cost 2→1.",
         "mech": [
           "colorless",
           "exhaust"
@@ -6734,7 +6754,7 @@ const DB = {
           "damage"
         ],
         "anti": [],
-        "notes": "Gets to 2-cost eventually. Too slow.",
+        "notes": "Gets to 2-cost eventually. Too slow. [Buffed v0.100.0] Damage 24(30)→27(35).",
         "mech": [
           "damage"
         ],
@@ -6748,7 +6768,7 @@ const DB = {
           "damage"
         ],
         "anti": [],
-        "notes": "Scales too slowly.",
+        "notes": "Scales too slowly. [Buffed v0.100.0] Base damage 8(8)→8(10), scaling 3(5)→4(6).",
         "mech": [
           "damage"
         ],
@@ -6780,7 +6800,7 @@ const DB = {
         "anti": [
           "stars"
         ],
-        "notes": "Pure Forge 10. Only useful in dedicated Forge builds — dead otherwise.",
+        "notes": "Pure Forge 10. Only useful in dedicated Forge builds — dead otherwise. [Buffed v0.100.0] Forge 10(15)→12(17).",
         "mech": [
           "forge"
         ],
@@ -6788,22 +6808,23 @@ const DB = {
       },
       "PARRY": {
         "id": "Parry",
-        "tier": "D",
+        "tier": "B",
         "builds": [
           "forge"
         ],
         "syn": [
-          "forge",
-          "block"
+          "sovereign_blade",
+          "block",
+          "dexterity"
         ],
         "anti": [
           "stars"
         ],
-        "notes": "Gain 6 Block whenever you play Sovereign Blade. Too conditional — Forge-only niche.",
+        "notes": "[Buffed v0.101.0; reworded v0.104.0] 1-cost Power: Sovereign Blade now gains 10(14) Block. Block is shown on Sovereign Blade itself and is now affected by Dexterity / Frail. Significantly stronger in Dex-stacking Regent builds.",
         "mech": [
           "block",
-          "forge",
-          "conditional"
+          "sovereign_blade",
+          "scaling"
         ],
         "role": "payoff"
       },
@@ -6847,7 +6868,7 @@ const DB = {
         "anti": [
           "stars"
         ],
-        "notes": "7 damage plus Forge 5. Efficient early Forge card that also deals damage.",
+        "notes": "7 damage plus Forge 5. Efficient early Forge card that also deals damage. [Buffed v0.100.0] Forge 5(7)→7(9).",
         "mech": [
           "damage",
           "forge"
@@ -6934,7 +6955,7 @@ const DB = {
         "anti": [
           "forge"
         ],
-        "notes": "7 damage plus 1 Weak and 1 Vulnerable. Basic setup card — fine early, outclassed later.",
+        "notes": "[Buffed v0.101.0] 8(12) damage + 1 Weak + 1 Vulnerable. Starter card; Star-build power spikes come online earlier.",
         "mech": [
           "vulnerable",
           "star_gain"
@@ -6984,7 +7005,7 @@ const DB = {
           "scaling"
         ],
         "anti": [],
-        "notes": "Forge 6 plus Energy next turn. Efficient Forge card that also fixes tempo.",
+        "notes": "[Buffed v0.101.0] Forge 9(13) (was 6(10)) + Energy next turn. Efficient Forge card that also fixes tempo.",
         "mech": [
           "forge",
           "energy_gain"
@@ -7004,7 +7025,7 @@ const DB = {
           "damage",
           "transform"
         ],
-        "notes": "Deal 4 damage and transform a hand card into Minion Dive Bomb. Good early damage with GUARDS!!! exhaust synergy. More useful than it first appears."
+        "notes": "[Changed v0.100.0] Now a Skill (no longer deals damage). Creates Minion Strike (was Minion Dive Bomb)."
       },
       "COLLISION_COURSE": {
         "id": "Collision Course",
@@ -7018,7 +7039,7 @@ const DB = {
         "mech": [
           "damage"
         ],
-        "notes": "9 damage but adds Debris to hand — Debris clogs draw badly."
+        "notes": "9 damage but adds Debris to hand — Debris clogs draw badly. [Buffed v0.100.0] Damage 9(12)→11(15)."
       },
       "CRUSH_UNDER": {
         "id": "Crush Under",
@@ -7055,7 +7076,7 @@ const DB = {
           "block",
           "delayed_block"
         ],
-        "notes": "11 Block plus 4 next turn — 15 total. Reliable defensive card."
+        "notes": "[Buffed v0.101.0] 11 Block + 5(7) Block next turn — 16+ total. Reliable defensive card."
       },
       "KNOW_THY_PLACE": {
         "id": "Know Thy Place",
@@ -7090,7 +7111,7 @@ const DB = {
         "mech": [
           "transform"
         ],
-        "notes": "Transforms 2 draw pile cards into Minion Strikes. Deck thinning with some upside in the right setup."
+        "notes": "[Changed v0.100.0] Now creates Minion Dive Bomb cards (was Minion Strike)."
       },
       "DEVASTATE": {
         "id": "Devastate",
@@ -7282,18 +7303,22 @@ const DB = {
         ],
         "role": "engine",
         "syn": [
+          "card_creation",
+          "forge",
+          "stars",
           "strength",
-          "colorless",
-          "scaling",
-          "permanent_scaling"
+          "shiv",
+          "summon",
+          "soul"
         ],
         "anti": [],
         "mech": [
           "strength",
-          "passive",
-          "permanent_scaling"
+          "card_creation_payoff",
+          "scaling",
+          "innate"
         ],
-        "notes": "Gain 1 permanent Strength per Colorless card played. Pairs with Spectrum Shift for passive scaling."
+        "notes": "[Reworked v0.101.0] 1-cost Power, Rare, Innate: Whenever you create a card, gain 1 Strength. Trigger broadened from Colorless-only to ANY card creation — Forge, Star payoffs, generated copies, summons. Pairs with Regalite for simultaneous Strength + Block on every card creation."
       },
       "HAMMER_TIME": {
         "id": "Hammer Time",
@@ -7350,7 +7375,7 @@ const DB = {
           "damage",
           "colorless"
         ],
-        "notes": "17 damage plus duplicates a Colorless card in hand. Pairs with Arsenal for double Strength triggers."
+        "notes": "17 damage plus duplicates a Colorless card in hand. Pairs with Arsenal for double Strength triggers. [Buffed v0.100.0] Damage 17(22)→20(25)."
       },
       "I_AM_INVINCIBLE": {
         "id": "I Am Invincible",
@@ -7370,7 +7395,7 @@ const DB = {
           "block",
           "recursive"
         ],
-        "notes": "Gain 9 Block. If on top of draw pile at end of turn, plays again. Recurring Block engine."
+        "notes": "Gain 9 Block. If on top of draw pile at end of turn, plays again. Recurring Block engine. [Buffed v0.100.0] Block 9(12)→10(13)."
       },
       "MAKE_IT_SO": {
         "id": "Make It So",
@@ -7456,7 +7481,7 @@ const DB = {
           "passive",
           "damage"
         ],
-        "notes": "Sovereign Blade costs 1 more but hits an extra time. Net positive with high Forge values."
+        "notes": "[Buffed v0.101.0] Sovereign Blade now hits an additional time and no longer costs more Energy. Pure upside in Forge/Sovereign Blade builds."
       },
       "THE_SMITH": {
         "id": "The Smith",
@@ -7571,23 +7596,26 @@ const DB = {
         "id": "Borrowed Time",
         "tier": "S",
         "builds": [
-          "soul",
-          "any"
+          "high_cost",
+          "reap",
+          "bury",
+          "soul"
         ],
         "syn": [
-          "soul",
           "energy_gain",
-          "scaling"
+          "high_cost",
+          "reap",
+          "bury",
+          "burst"
         ],
         "anti": [
           "doom",
           "osty"
         ],
-        "notes": "0-cost: gain 1 energy, apply 3 Doom to self. The 3 self-Doom is almost irrelevant. Best 0-cost.",
+        "notes": "[Reworked v0.102.0] 1-cost Skill: Gain 4(6) Energy, all cards cost +1 this turn. No longer self-Doom. Best with high-cost Necrobinder cards (Reap, Bury, Banshee's Cry) where the surcharge barely matters.",
         "mech": [
           "energy_gain",
-          "zero_cost",
-          "self_doom"
+          "cost_increase"
         ],
         "role": "engine"
       },
@@ -7704,7 +7732,7 @@ const DB = {
           "doom",
           "osty"
         ],
-        "notes": "Enemy loses 3 HP. Add 3 Souls into Draw Pile. S-tier engine — generates 3 Souls AND deals chip damage. Each Soul drawn fuels Haunt, Death March, Soul Storm.",
+        "notes": "[v0.100.0 nerf reverted in v0.101.0] Restored to original: HP loss 3(4), Souls 3(4). Top Necrobinder pick again.",
         "mech": [
           "soul_gen",
           "draw"
@@ -7983,7 +8011,7 @@ const DB = {
           "soul",
           "osty"
         ],
-        "notes": "Deal 7 damage. Vulnerable and Weak are twice as effective for 3 turns. A-tier — this doubles ALL Vulnerable and Weak on the enemy for 3 turns. Insane multiplier for debuff builds.",
+        "notes": "Deal 7 damage. Vulnerable and Weak are twice as effective for 3 turns. A-tier — this doubles ALL Vulnerable and Weak on the enemy for 3 turns. Insane multiplier for debuff builds. [Buffed v0.100.0] Damage 7(9)→10(12).",
         "mech": [
           "damage",
           "weak",
@@ -8079,7 +8107,7 @@ const DB = {
           "soul",
           "osty"
         ],
-        "notes": "33 AoE, costs 2 less per ethereal played. Gets free with enough ethereals.",
+        "notes": "[Nerfed v0.100.0] Cost 6 → 9(7). Upgrade no longer increases damage. 33 AoE; cost reduces 2 per Ethereal played. Steeper to drop down without strong Ethereal density.",
         "mech": [
           "damage",
           "aoe",
@@ -8167,7 +8195,7 @@ const DB = {
           "doom",
           "osty"
         ],
-        "notes": "8 block + adds a Soul. Defense plus soul generation.",
+        "notes": "[Changed v0.100.0] 8 Block + add a Soul to Draw Pile. Upgrade now 8(11) Block (was 8(10)) and no longer upgrades the Soul.",
         "mech": [
           "block",
           "soul_generator"
@@ -8325,7 +8353,7 @@ const DB = {
           "soul",
           "osty"
         ],
-        "notes": "3 block per expensive card played. Passive block in doom builds.",
+        "notes": "3 block per expensive card played. Passive block in doom builds. [Buffed v0.100.0] Block 3(4)→4(6).",
         "mech": [
           "block",
           "passive"
@@ -8349,11 +8377,12 @@ const DB = {
           "doom",
           "osty"
         ],
-        "notes": "Make X Souls + raise Osty's HP. Setup card for soul+osty combo.",
+        "notes": "[Nerfed v0.100.0] Now Exhausts. Make X Souls + raise Osty's HP. Setup card for soul+osty combo, but one-shot.",
         "mech": [
           "soul_generator",
           "osty_buff",
-          "scaling"
+          "scaling",
+          "exhaust"
         ],
         "role": "generator"
       },
@@ -8765,7 +8794,7 @@ const DB = {
           "weak",
           "ethereal"
         ],
-        "notes": "Ethereal. Gain 6 Block plus apply 1 Weak. C-tier — decent early, but Weak is only 1 stack and Ethereal limits flexibility."
+        "notes": "[Changed v0.100.0] Ethereal. Gain 6 Block + apply 1 Weak. Upgrade no longer increases Weak; instead +3 Block."
       },
       "DRAIN_POWER": {
         "id": "Drain Power",
@@ -8854,7 +8883,7 @@ const DB = {
           "damage",
           "ethereal"
         ],
-        "notes": "Deal 8 damage. Add Ethereal to a card in Hand. C-tier — adds Ethereal for Spirit of Ash/Pagestorm synergy but the application is narrow."
+        "notes": "Deal 8 damage. Add Ethereal to a card in Hand. C-tier — adds Ethereal for Spirit of Ash/Pagestorm synergy but the application is narrow. [Buffed v0.100.0] Damage 8(11)→9(12)."
       },
       "SOW": {
         "id": "Sow",
@@ -9256,7 +9285,7 @@ const DB = {
           "exhaust",
           "transform"
         ],
-        "notes": "Ethereal. Transform a Draw Pile card into a Soul. S-tier — converts dead cards into Souls for Haunt, Death March, Soul Storm. Deck thinning + Soul generation simultaneously."
+        "notes": "[Nerfed v0.100.0] Cost 0 → 1(0). Upgrade no longer makes a Soul+. Ethereal. Transforms a Draw Pile card into a Soul. Still strong as a deck-thinning Soul gen."
       },
       "SENTRY_MODE": {
         "id": "Sentry Mode",
@@ -9628,7 +9657,7 @@ const DB = {
         "mech": [
           "energy_gain"
         ],
-        "notes": "Another player gains 3 Energy. D-tier — no solo value. Multiplayer only."
+        "notes": "Another player gains 3 Energy. D-tier — no solo value. Multiplayer only. [Nerfed v0.100.0] Energy 3(4)→2(3)."
       },
       "CATASTROPHE": {
         "id": "Catastrophe",
@@ -9692,7 +9721,7 @@ const DB = {
           "draw",
           "exhaust"
         ],
-        "notes": "Choose 1 of 3 random cards to add to Hand, free this turn. Exhaust. A-tier — free card this turn from any class pool. Flexible and generates immediate value."
+        "notes": "[Changed v0.100.0] Choose 1 of 3 random cards to add to Hand, free to play this turn, Exhaust. Star cost is also reduced to 0 this turn (new — under \"Free to Play\" wording)."
       },
       "EQUILIBRIUM": {
         "id": "Equilibrium",
@@ -9782,9 +9811,10 @@ const DB = {
         "syn": [],
         "anti": [],
         "mech": [
-          "draw"
+          "draw",
+          "exhaust"
         ],
-        "notes": "ALL allies draw 2 cards. D-tier — multiplayer only. No solo benefit."
+        "notes": "ALL allies draw 2 cards. D-tier — multiplayer only. No solo benefit. [Nerfed v0.100.0] Now Exhausts."
       },
       "IMPATIENCE": {
         "id": "Impatience",
@@ -9897,7 +9927,7 @@ const DB = {
           "energy_gain",
           "exhaust"
         ],
-        "notes": "Gain 2 Energy. Exhaust. B-tier — free 2 Energy once per fight. Enables massive single-turn plays when needed."
+        "notes": "[Changed v0.100.0] 0-cost Skill, Uncommon: Gain 2 Energy, Exhaust. Upgrade now adds +1 Energy (was: removes Exhaust). Free 3 Energy on a one-shot."
       },
       "PROLONG": {
         "id": "Prolong",
@@ -9993,7 +10023,7 @@ const DB = {
           "damage",
           "draw"
         ],
-        "notes": "Deal 6 damage. Choose 1 of 3 Draw Pile cards to add to Hand. B-tier — damage plus tutoring. Find your engine card on demand."
+        "notes": "Deal 6 damage. Choose 1 of 3 Draw Pile cards to add to Hand. B-tier — damage plus tutoring. Find your engine card on demand. [Buffed v0.100.0] Damage 6(9)→9(12)."
       },
       "SHOCKWAVE": {
         "id": "Shockwave",
@@ -10049,7 +10079,7 @@ const DB = {
           "draw",
           "passive"
         ],
-        "notes": "Whenever you shuffle Draw Pile, choose a card from it to put in Hand. B-tier — consistent setup insurance every cycle. Always have your key card available."
+        "notes": "Whenever you shuffle Draw Pile, choose a card from it to put in Hand. B-tier — consistent setup insurance every cycle. Always have your key card available. [Note v0.103.2] No longer banned from the Colorless pool in multiplayer."
       },
       "TAG_TEAM": {
         "id": "Tag Team",
@@ -10061,7 +10091,7 @@ const DB = {
         "mech": [
           "damage"
         ],
-        "notes": "Deal 11 damage. Another player's next attack plays an extra time. D-tier — multiplayer only upside."
+        "notes": "Deal 11 damage. Another player's next attack plays an extra time. D-tier — multiplayer only upside. [Buffed v0.103.2] Replay effect now also triggers on 'deal damage to ALL enemies' attacks."
       },
       "THRUMMING_HATCHET": {
         "id": "Thrumming Hatchet",
@@ -10172,7 +10202,7 @@ const DB = {
           "block",
           "passive"
         ],
-        "notes": "Whenever you gain Block, other players gain half. D-tier — multiplayer only upside. Solo: no benefit."
+        "notes": "[Nerfed v0.100.0] Can no longer be stacked. Whenever you gain Block, other players gain half. Multiplayer-only — D-tier solo."
       },
       "BEAT_DOWN": {
         "id": "Beat Down",
@@ -10259,7 +10289,7 @@ const DB = {
           "plating",
           "permanent_scaling"
         ],
-        "notes": "Gain 7 Plating (permanent flat damage reduction per hit). B-tier — Plating stacks and never expires. Extremely durable in long fights."
+        "notes": "Gain 7 Plating (permanent flat damage reduction per hit). B-tier — Plating stacks and never expires. Extremely durable in long fights. [Buffed v0.100.0] Plating 7(9)→9(12)."
       },
       "GOLD_AXE": {
         "id": "Gold Axe",
@@ -10281,7 +10311,7 @@ const DB = {
       },
       "HIDDEN_GEM": {
         "id": "Hidden Gem",
-        "tier": "C",
+        "tier": "B",
         "builds": [
           "any"
         ],
@@ -10294,7 +10324,7 @@ const DB = {
         "mech": [
           "replay"
         ],
-        "notes": "A random Draw Pile card gains Replay 2. C-tier — Replay 2 means it plays 2 extra times. Hitting a key engine card is broken, hitting filler is wasted."
+        "notes": "[Reworked v0.103.2; v0.100.0 patch] Colorless Skill that grants Replay-style scaling. Can no longer be generated mid-combat by Skill Potion etc. Verify in-game text for current numbers; tier reflects general role."
       },
       "JACKPOT": {
         "id": "Jackpot",
@@ -10576,7 +10606,7 @@ const DB = {
           "draw",
           "exhaust"
         ],
-        "notes": "Deal 10 damage. Put 2 random Discard cards into Hand. Exhaust. A-tier — Ancient. 10 damage plus card retrieval. Retrieves key cards exactly when needed."
+        "notes": "[Buffed v0.104.0] You now CHOOSE up to 2 cards from your Discard Pile to add to Hand (was random). May choose 0 or 1 if preferred."
       },
       "RELAX": {
         "id": "Relax",
@@ -11686,25 +11716,19 @@ const DB = {
     {
       "deckCard": "Barricade",
       "offeredCard": "Body Slam",
-      "bonus": 3.0,
+      "bonus": 3,
       "reason": "Body Slam damage = current block — Barricade stacks block over turns making each Body Slam devastating"
     },
     {
       "deckCard": "Barricade",
       "offeredCard": "Entrench",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Entrench doubles current block — with Barricade retaining it, you reach absurd defense every 2 turns"
-    },
-    {
-      "deckCard": "Barricade",
-      "offeredCard": "Grapple",
-      "bonus": 1.5,
-      "reason": "Grapple converts block to damage — Barricade stacks block over turns giving Grapple huge numbers"
     },
     {
       "deckCard": "Entrench",
       "offeredCard": "Barricade",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Barricade retains the doubled block from Entrench — stacks get massive after a few turns"
     },
     {
@@ -11722,19 +11746,19 @@ const DB = {
     {
       "deckCard": "Juggernaut",
       "offeredCard": "Body Slam",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Both reward having high block — natural pairing in block builds"
     },
     {
       "deckCard": "Demon Form",
       "offeredCard": "Limit Break",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Demon Form gives Strength every turn — Limit Break DOUBLES that accumulated Strength. Exponential scaling."
     },
     {
       "deckCard": "Limit Break",
       "offeredCard": "Demon Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Limit Break doubles your Strength — Demon Form keeps generating more Strength to double each fight"
     },
     {
@@ -11764,7 +11788,7 @@ const DB = {
     {
       "deckCard": "Double Tap",
       "offeredCard": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Double Tap plays next attack twice — Whirlwind twice with high Strength deletes everything"
     },
     {
@@ -11782,37 +11806,37 @@ const DB = {
     {
       "deckCard": "Corruption",
       "offeredCard": "Feel No Pain",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption exhausts every skill — Feel No Pain gains block for EACH one. Massive block generation."
     },
     {
       "deckCard": "Corruption",
       "offeredCard": "Dark Embrace",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption exhausts every skill — Dark Embrace draws a card for each. Free card draw on every skill."
     },
     {
       "deckCard": "Feel No Pain",
       "offeredCard": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption is the engine that makes Feel No Pain trigger constantly — defines exhaust builds"
     },
     {
       "deckCard": "Dark Embrace",
       "offeredCard": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption triggers Dark Embrace on every skill — turns deck into a draw engine"
     },
     {
       "deckCard": "Feel No Pain",
       "offeredCard": "Dark Embrace",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Both exhaust payoffs — natural pairing in exhaust builds"
     },
     {
       "deckCard": "Dark Embrace",
       "offeredCard": "Feel No Pain",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Both exhaust payoffs — natural pairing in exhaust builds"
     },
     {
@@ -11830,7 +11854,7 @@ const DB = {
     {
       "deckCard": "Rupture",
       "offeredCard": "Bloodletting",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Bloodletting loses HP every play — Rupture gains 1 Strength each time. Free permanent Strength every turn."
     },
     {
@@ -11872,7 +11896,7 @@ const DB = {
     {
       "deckCard": "Bloodletting",
       "offeredCard": "Rupture",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rupture is the payoff for Bloodletting — turns energy generation into permanent Strength"
     },
     {
@@ -11884,7 +11908,7 @@ const DB = {
     {
       "deckCard": "Tools Of The Trade",
       "offeredCard": "Reflex",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tools of the Trade discards 1 every turn — Reflex plays free when discarded. Free Draw 2 every turn."
     },
     {
@@ -11914,7 +11938,7 @@ const DB = {
     {
       "deckCard": "Tools Of The Trade",
       "offeredCard": "Tactician",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tools of the Trade discards 1 every turn — Tactician plays free when discarded. Free energy every turn."
     },
     {
@@ -11962,13 +11986,13 @@ const DB = {
     {
       "deckCard": "Accuracy",
       "offeredCard": "Blade Dance",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Accuracy adds damage to every Shiv — Blade Dance creates 3 Shivs at once for immediate burst"
     },
     {
       "deckCard": "Accuracy",
       "offeredCard": "Infinite Blades",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Accuracy multiplies every Shiv's damage — Infinite Blades guarantees a buffed Shiv every turn"
     },
     {
@@ -11992,7 +12016,7 @@ const DB = {
     {
       "deckCard": "Infinite Blades",
       "offeredCard": "Accuracy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Accuracy multiplies the damage of every free Shiv from Infinite Blades — take it immediately"
     },
     {
@@ -12022,13 +12046,13 @@ const DB = {
     {
       "deckCard": "Claw",
       "offeredCard": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "More Claws = each play scales ALL copies faster. Density is the entire point of Claw builds."
     },
     {
       "deckCard": "Claw",
       "offeredCard": "Feral",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Feral is Echo Form for 0-cost cards — doubles every Claw play for the rest of combat"
     },
     {
@@ -12070,7 +12094,7 @@ const DB = {
     {
       "deckCard": "Capacitor",
       "offeredCard": "Barrage",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Barrage hits per orb slot — Capacitor directly adds slots = directly more Barrage damage"
     },
     {
@@ -12118,7 +12142,7 @@ const DB = {
     {
       "deckCard": "Royal Gamble",
       "offeredCard": "Radiate",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Royal Gamble dumps 9 Stars — Radiate converts them to 27 AoE damage from one combo"
     },
     {
@@ -12160,7 +12184,7 @@ const DB = {
     {
       "deckCard": "Haunt",
       "offeredCard": "Capture Spirit",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Capture Spirit generates 3 Souls — each Soul triggers Haunt for 6 unavoidable damage. Core engine."
     },
     {
@@ -12184,7 +12208,7 @@ const DB = {
     {
       "deckCard": "Capture Spirit",
       "offeredCard": "Haunt",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Haunt is the win condition for Soul generation — Capture Spirit feeds it consistently"
     },
     {
@@ -12208,13 +12232,13 @@ const DB = {
     {
       "deckCard": "Symbiosis",
       "offeredCard": "Unleash",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Unleash deals damage = Osty's Max HP — Symbiosis directly builds that Max HP"
     },
     {
       "deckCard": "Bodyguard",
       "offeredCard": "Unleash",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Bodyguard raises Osty's Max HP — Unleash converts that HP directly into damage"
     },
     {
@@ -12268,7 +12292,7 @@ const DB = {
     {
       "deckCard": "Borrowed Time",
       "offeredCard": "End of Days",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Borrowed Time provides free energy to afford End of Days' 3-cost more easily"
     },
     {
@@ -12298,7 +12322,7 @@ const DB = {
     {
       "deckCard": "Tools Of The Trade",
       "offeredCard": "Ricochet",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "TotT discards 1/turn — Ricochet plays free, attaching bonus hits to every attack"
     },
     {
@@ -12310,13 +12334,13 @@ const DB = {
     {
       "deckCard": "Acrobatics",
       "offeredCard": "Prepared",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Acrobatics + Prepared create infinite discard loop — each triggers the other for endless free draws"
     },
     {
       "deckCard": "Genesis",
       "offeredCard": "Void Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Genesis generates Stars passively — Void Form consumes Stars to grow and weaken enemies"
     },
     {
@@ -12352,19 +12376,19 @@ const DB = {
     {
       "deckCard": "Void Form",
       "offeredCard": "Genesis",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Void Form consumes Stars for massive Weakness — Genesis ensures steady passive supply"
     },
     {
       "deckCard": "Void Form",
       "offeredCard": "Radiate",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Void Form accumulates Stars — Radiate converts each Star to 3 AoE damage"
     },
     {
       "deckCard": "End of Days",
       "offeredCard": "Oblivion",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "End of Days executes Doomed enemies — Oblivion applies Doom to all enemies simultaneously"
     },
     {
@@ -12430,7 +12454,7 @@ const DB = {
     {
       "deckCard": "Corruption",
       "offeredCard": "Cinder",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Corruption makes skills exhaust constantly — Cinder adds another reliable exhaust trigger alongside good damage."
     },
     {
@@ -12454,13 +12478,13 @@ const DB = {
     {
       "deckCard": "Setup Strike",
       "offeredCard": "Juggling",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Juggling is multi-hit and scales with Strength — Setup Strike's temporary boost amplifies every hit."
     },
     {
       "deckCard": "Setup Strike",
       "offeredCard": "Stomp",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Stomp is multi-hit and scales with Strength — Setup Strike's temporary +2 Strength amplifies every hit."
     },
     {
@@ -12484,13 +12508,13 @@ const DB = {
     {
       "deckCard": "Tremble",
       "offeredCard": "Bully",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tremble applies 2 Vulnerable — Bully deals 4+2 per stack, turning into 8 damage immediately after Tremble. Core Vulnerable combo."
     },
     {
       "deckCard": "Bully",
       "offeredCard": "Tremble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Bully scales with Vulnerable stacks — Tremble is the cheapest 0-cost setup that feeds Bully directly."
     },
     {
@@ -12520,7 +12544,7 @@ const DB = {
     {
       "deckCard": "Tremble",
       "offeredCard": "Uppercut",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Both apply Vulnerable — Tremble stacks 2, Uppercut stacks 1, chaining them for more Vulnerable to feed Bully/Dominate."
     },
     {
@@ -12556,7 +12580,7 @@ const DB = {
     {
       "deckCard": "Inflame",
       "offeredCard": "Dominate",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Both stack Strength — Inflame provides flat Strength, Dominate provides burst Strength from Vulnerable. Stack sources."
     },
     {
@@ -12574,25 +12598,25 @@ const DB = {
     {
       "deckCard": "Drum of Battle",
       "offeredCard": "Forgotten Ritual",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Drum exhausts at turn START — Forgotten Ritual fires for +3 energy every turn automatically. Free energy engine."
     },
     {
       "deckCard": "Forgotten Ritual",
       "offeredCard": "Drum of Battle",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Drum of Battle guarantees an exhaust at turn start — Forgotten Ritual triggers for +3 energy every turn without playing extra cards."
     },
     {
       "deckCard": "Corruption",
       "offeredCard": "Forgotten Ritual",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption makes every skill exhaust — Forgotten Ritual fires for +3 energy almost every turn. Near-infinite energy loop in exhaust builds."
     },
     {
       "deckCard": "Forgotten Ritual",
       "offeredCard": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Forgotten Ritual needs an exhaust trigger — Corruption makes every skill exhaust, firing Ritual nearly every turn."
     },
     {
@@ -12622,13 +12646,13 @@ const DB = {
     {
       "deckCard": "Forgotten Ritual",
       "offeredCard": "Howl from Beyond",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Howl from Beyond exhausts at turn start each turn — Forgotten Ritual fires for +3 free energy every turn. Completely passive energy engine."
     },
     {
       "deckCard": "Howl from Beyond",
       "offeredCard": "Forgotten Ritual",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Forgotten Ritual needs a turn-start exhaust — Howl from Beyond provides exactly that every single turn. Permanent +2 energy per turn."
     },
     {
@@ -12652,13 +12676,13 @@ const DB = {
     {
       "deckCard": "Inferno",
       "offeredCard": "Brutality",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Brutality loses 1 HP at turn start passively — Inferno fires 6 AoE automatically every single turn from Brutality alone."
     },
     {
       "deckCard": "Brutality",
       "offeredCard": "Inferno",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Inferno deals 6 AoE whenever you lose HP — Brutality's passive turn-start HP loss triggers Inferno every turn for free AoE."
     },
     {
@@ -12712,19 +12736,19 @@ const DB = {
     {
       "deckCard": "Hellraiser",
       "offeredCard": "Stampede",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Both auto-fire attacks passively — Hellraiser on draw, Stampede at turn end. Strike-heavy decks benefit from both passive damage sources."
     },
     {
       "deckCard": "Unrelenting",
       "offeredCard": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Unrelenting makes next attack 0 cost — Whirlwind (normally X-cost) becomes free, letting you dump all remaining energy into it."
     },
     {
       "deckCard": "Whirlwind",
       "offeredCard": "Unrelenting",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Whirlwind is most powerful with more energy — Unrelenting makes it free, so all energy goes into Whirlwind hits instead of paying its cost."
     },
     {
@@ -12754,31 +12778,31 @@ const DB = {
     {
       "deckCard": "Hellraiser",
       "offeredCard": "Perfected Strike",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hellraiser auto-plays Strikes when drawn — more Strikes in deck = more Hellraiser triggers AND higher Perfected Strike base damage. Core synergy."
     },
     {
       "deckCard": "Perfected Strike",
       "offeredCard": "Hellraiser",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Perfected Strike scales with every Strike card in deck — Hellraiser rewards keeping Strikes by auto-firing them on draw."
     },
     {
       "deckCard": "One-Two Punch",
       "offeredCard": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "One-Two Punch doubles next Attack — Whirlwind plays twice for double energy-scaling AoE. Nuclear with Strength."
     },
     {
       "deckCard": "One-Two Punch",
       "offeredCard": "Reaper",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "One-Two Punch doubles Reaper — double AoE damage AND double HP healing. One of the strongest plays in the game."
     },
     {
       "deckCard": "Reaper",
       "offeredCard": "One-Two Punch",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Reaper played twice = double AoE damage + double HP healing — One-Two Punch is the best enabler for this."
     },
     {
@@ -12808,25 +12832,25 @@ const DB = {
     {
       "deckCard": "Dark Embrace",
       "offeredCard": "Pact's End",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "In exhaust builds where Pact's End is live, Dark Embrace is also drawing cards from the same exhaust triggers — natural co-inhabitants."
     },
     {
       "deckCard": "True Grit",
       "offeredCard": "Pact's End",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "True Grit contributes to exhaust count — helps qualify Pact's End earlier in the fight."
     },
     {
       "deckCard": "Hellraiser",
       "offeredCard": "Pommel Strike",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Pommel Strike contains 'Strike' — Hellraiser fires it for free when drawn. Pommel Strike also draws a card which may draw another Strike, potentially chaining infinitely."
     },
     {
       "deckCard": "Pommel Strike",
       "offeredCard": "Hellraiser",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hellraiser auto-plays Pommel Strike when drawn — Pommel Strike draws a card which can chain into more Strike triggers. The core of Hellraiser infinite."
     },
     {
@@ -12940,7 +12964,7 @@ const DB = {
     {
       "deckCard": "Drum of Battle",
       "offeredCard": "Ashen Strike",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Drum of Battle exhausts 1 card every turn, growing the exhaust pile — Ashen Strike deals 3 extra damage per card in exhaust pile, scaling through the whole fight."
     },
     {
@@ -12958,37 +12982,37 @@ const DB = {
     {
       "deckCard": "Pact's End",
       "offeredCard": "Second Wind",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Second Wind exhausts all non-attacks — quickly satisfies and re-satisfies Pact's End's condition while gaining block."
     },
     {
       "deckCard": "Second Wind",
       "offeredCard": "Pact's End",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Second Wind contributes multiple exhausted cards at once — helps qualify and maintain Pact's End's 3-exhaust condition."
     },
     {
       "deckCard": "Howl from Beyond",
       "offeredCard": "Ashen Strike",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Howl from Beyond exhausts at start of every turn — each cycle grows the exhaust pile, directly increasing Ashen Strike's bonus damage throughout the fight."
     },
     {
       "deckCard": "Ashen Strike",
       "offeredCard": "Howl from Beyond",
-      "bonus": 1.0,
+      "bonus": 1,
       "reason": "Howl from Beyond passively exhausts every turn — consistently grows the exhaust pile that Ashen Strike scales with."
     },
     {
       "deckCard": "Rupture",
       "offeredCard": "Tear Asunder",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tear Asunder hits more times per HP lost this combat — Rupture gives Strength each HP loss, so every stack that empowers Tear Asunder also gave you Strength. Both scale off the same resource."
     },
     {
       "deckCard": "Tear Asunder",
       "offeredCard": "Rupture",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rupture gains Strength from HP loss — every event that adds a Tear Asunder hit also gave Rupture Strength. Stack both for exponential scaling."
     },
     {
@@ -13048,25 +13072,25 @@ const DB = {
     {
       "deckCard": "Anger",
       "offeredCard": "Headbutt",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Anger puts a copy into discard — Headbutt retrieves cards from discard to top of draw pile. Chain Headbutt → draw Anger → play Anger → new copy in discard → repeat for near-infinite free attacks."
     },
     {
       "deckCard": "Headbutt",
       "offeredCard": "Anger",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Headbutt puts discard cards on top of draw — with Anger copies in discard, you can chain free 0-cost attacks repeatedly each turn."
     },
     {
       "deckCard": "Rupture",
       "offeredCard": "Limit Break",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rupture builds Strength from HP loss — Limit Break doubles whatever Rupture has accumulated. Stack HP-loss events then double the resulting Strength for exponential scaling."
     },
     {
       "deckCard": "Limit Break",
       "offeredCard": "Rupture",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Limit Break doubles your Strength — Rupture is the fastest way to generate Strength through self-damage, making Limit Break's doubling more powerful."
     },
     {
@@ -13228,13 +13252,13 @@ const DB = {
     {
       "deckCard": "Burst",
       "offeredCard": "Calculated Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Burst makes next skill play twice — Calculated Gamble plays twice, discarding hand TWICE, triggering every Sly card in hand twice in one turn."
     },
     {
       "deckCard": "Calculated Gamble",
       "offeredCard": "Burst",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Calculated Gamble plays twice with Burst — double discard = every Sly card fires twice. Explosive turn."
     },
     {
@@ -13258,7 +13282,7 @@ const DB = {
     {
       "deckCard": "Master Planner",
       "offeredCard": "Tools Of The Trade",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tools of the Trade discards each turn — with Master Planner giving all Skills Sly, every skill in hand fires for free each turn passively."
     },
     {
@@ -13294,13 +13318,13 @@ const DB = {
     {
       "deckCard": "Nightmare",
       "offeredCard": "Reflex",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Nightmare creates 3 Reflex — discard all three for Draw 6 total for free. Entire deck cycle in one turn."
     },
     {
       "deckCard": "Nightmare",
       "offeredCard": "Tactician",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Nightmare creates 3 Tactician — discard all three for 3 free energy. Effectively unlimited energy next turn."
     },
     {
@@ -13312,13 +13336,13 @@ const DB = {
     {
       "deckCard": "Speedster",
       "offeredCard": "Calculated Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Speedster makes hand free — Calculated Gamble plus all Sly cards in hand play for 0 energy. Entire combo turn costs nothing."
     },
     {
       "deckCard": "Speedster",
       "offeredCard": "Master Planner",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Speedster + Master Planner = all skills cost 0 AND have Sly. Play the free skills, discard the Sly ones for more free triggers. Infinite loop potential."
     },
     {
@@ -13342,13 +13366,13 @@ const DB = {
     {
       "deckCard": "Tools Of The Trade",
       "offeredCard": "Abrasive",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tools of the Trade discards 1 each turn — if Abrasive is discarded, gain +1 permanent Dex every single turn passively. Scales infinitely."
     },
     {
       "deckCard": "Bullet Time",
       "offeredCard": "Blade Dance",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Bullet Time doubles next Skill — Blade Dance plays twice = 6 Shivs in one turn. Enormous Shiv burst."
     },
     {
@@ -13378,7 +13402,7 @@ const DB = {
     {
       "deckCard": "Tools Of The Trade",
       "offeredCard": "Corrosive Wave",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tools of the Trade discards 1 each turn — Corrosive Wave applies 4 AoE Poison for free when discarded. Free AoE Poison every turn passively."
     },
     {
@@ -13432,13 +13456,13 @@ const DB = {
     {
       "deckCard": "Accelerant",
       "offeredCard": "Noxious Fumes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Noxious Fumes stacks poison every turn — Accelerant makes it trigger twice per turn. Every Noxious Fumes stack deals double damage with Accelerant active."
     },
     {
       "deckCard": "Noxious Fumes",
       "offeredCard": "Accelerant",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Accelerant doubles poison tick rate — Noxious Fumes' passive stacks become twice as deadly. Core Poison scaling engine."
     },
     {
@@ -13456,7 +13480,7 @@ const DB = {
     {
       "deckCard": "Nightmare",
       "offeredCard": "Accelerant",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Nightmare creates 3 copies of Accelerant — play all three next turn for poison triggering 4 times per turn. Unstoppable poison scaling."
     },
     {
@@ -13498,13 +13522,13 @@ const DB = {
     {
       "deckCard": "Dagger Spray",
       "offeredCard": "Envenom",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Envenom applies Poison whenever an Attack deals unblocked damage — Dagger Spray hits ALL enemies twice. Each hit per enemy applies Poison = 2 Poison stacks per enemy per cast. Silent's best AoE Poison spreader."
     },
     {
       "deckCard": "Envenom",
       "offeredCard": "Dagger Spray",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Dagger Spray hits all enemies twice — with Envenom that's 2 Poison stacks per enemy in one card. Best AoE Poison application available."
     },
     {
@@ -13534,13 +13558,13 @@ const DB = {
     {
       "deckCard": "Leading Strike",
       "offeredCard": "Accuracy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Leading Strike generates a Shiv — that Shiv immediately benefits from Accuracy's +4 damage. With 2 Accuracy copies the generated Shiv hits for 12 damage."
     },
     {
       "deckCard": "Accuracy",
       "offeredCard": "Leading Strike",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Leading Strike generates a Shiv that gets full Accuracy bonus — consistent Accuracy-boosted Shiv generation every turn."
     },
     {
@@ -13582,7 +13606,7 @@ const DB = {
     {
       "deckCard": "Expose",
       "offeredCard": "Finisher",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Expose applies 2 Vulnerable then Exhaust — follow with Finisher for 50%+ more damage per hit multiplied by attacks played. Strips Artifact first so Vulnerable actually applies."
     },
     {
@@ -13648,7 +13672,7 @@ const DB = {
     {
       "deckCard": "Well-Laid Plans",
       "offeredCard": "Flechettes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Retaining Skills inflates hand Skill count — Flechettes deals 5 damage per Skill in hand. Retain 3 Skills and Flechettes deals 15+ bonus damage before the hand you play this turn."
     },
     {
@@ -13684,7 +13708,7 @@ const DB = {
     {
       "deckCard": "Abrasive",
       "offeredCard": "Tools Of The Trade",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tools of the Trade discards 1 each turn — if Abrasive is discarded via Sly, gain +1 permanent Dex and +4 Thorns every single turn passively. Infinite scaling."
     },
     {
@@ -13696,13 +13720,13 @@ const DB = {
     {
       "deckCard": "Afterimage",
       "offeredCard": "Blade Dance",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Blade Dance generates 3 Shivs — play Blade Dance (1 proc) then 3 Shivs (3 procs) = 4 Afterimage block from one card sequence."
     },
     {
       "deckCard": "Afterimage",
       "offeredCard": "Storm Of Steel",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Storm of Steel discards hand generating Shivs equal to hand size — each Sly trigger and each Shiv played procs Afterimage. Massive block generation."
     },
     {
@@ -13714,7 +13738,7 @@ const DB = {
     {
       "deckCard": "Bullet Time",
       "offeredCard": "Well-Laid Plans",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Well-Laid Plans retains cards between turns — build up a big hand of Sly cards then play Bullet Time to play everything for free. Pre-loads the hand for maximum Bullet Time value."
     },
     {
@@ -13732,13 +13756,13 @@ const DB = {
     {
       "deckCard": "Corrosive Wave",
       "offeredCard": "Acrobatics",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Acrobatics draws 3 cards — with Corrosive Wave active that's 9 Poison to ALL enemies from one card. Stack both for instant massive Poison application."
     },
     {
       "deckCard": "Corrosive Wave",
       "offeredCard": "Expertise",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Expertise draws until hand has 6 — if you had 2 cards, 4 draws = 12 Poison to all enemies just from playing Expertise with Corrosive Wave active."
     },
     {
@@ -13828,7 +13852,7 @@ const DB = {
     {
       "deckCard": "Shadow Step",
       "offeredCard": "Finisher",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shadow Step doubles attacks next turn — Finisher hits for per-attack damage. With double damage active Finisher's damage is doubled on top of its scaling."
     },
     {
@@ -13852,13 +13876,13 @@ const DB = {
     {
       "deckCard": "Tracking",
       "offeredCard": "Suppress",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Suppress is Innate applying 3 Weak turn 1 — Tracking is already active turn 1 making Suppress's 3 Weak immediately enable double damage from the opening hand."
     },
     {
       "deckCard": "Suppress",
       "offeredCard": "Tracking",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Suppress applies 3 Weak on turn 1 (Innate) — with Tracking in play that immediately means double damage from all attacks for the whole fight from the start."
     },
     {
@@ -13870,7 +13894,7 @@ const DB = {
     {
       "deckCard": "Wraith Form",
       "offeredCard": "Nightmare",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Nightmare creates 3 copies of a card — triple Wraith Form means 6 turns of Intangible back to back. Near-infinite immunity window while Dex loss is manageable."
     },
     {
@@ -13894,13 +13918,13 @@ const DB = {
     {
       "deckCard": "Follow Through",
       "offeredCard": "Tracking",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Follow Through applies 1 Weak to ALL enemies if last card was a Skill — Tracking makes Weak enemies take double damage. Natural combo: play a Skill, Follow Through for AoE Weak, all future attacks deal double."
     },
     {
       "deckCard": "Tracking",
       "offeredCard": "Follow Through",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tracking doubles damage on Weak enemies — Follow Through applies AoE Weak if preceded by a Skill. Consistent AoE Weak application feeding Tracking's double damage multiplier."
     },
     {
@@ -13918,7 +13942,7 @@ const DB = {
     {
       "deckCard": "Shadowmeld",
       "offeredCard": "Footwork",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shadowmeld doubles all Block gained this turn — Footwork's Dex makes every block card give more block. With 3 Dex and Shadowmeld, each block card's value is dramatically multiplied."
     },
     {
@@ -13966,19 +13990,19 @@ const DB = {
     {
       "deckCard": "Pounce",
       "offeredCard": "Burst",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Pounce makes next Skill free — Burst is 1 cost. Pounce + free Burst = your next Skill plays twice for 0 energy. Game-changing combo enabler."
     },
     {
       "deckCard": "Memento Mori",
       "offeredCard": "Calculated Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Calculated Gamble discards entire hand — play Memento Mori after for 8 + 4 per card discarded. With 6 discards that's 32 damage for 1 energy."
     },
     {
       "deckCard": "Outbreak",
       "offeredCard": "Noxious Fumes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Noxious Fumes applies 2 Poison to ALL enemies each turn — Outbreak fires 11 AoE every 3 Poison applications. Noxious Fumes alone triggers Outbreak consistently across multi-enemy rooms."
     },
     {
@@ -13990,7 +14014,7 @@ const DB = {
     {
       "deckCard": "Hidden Daggers",
       "offeredCard": "Accuracy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hidden Daggers generates 2 Shivs AND discards 2 triggering Sly effects. Both generated Shivs get Accuracy's full damage bonus immediately."
     },
     {
@@ -14002,19 +14026,19 @@ const DB = {
     {
       "deckCard": "Precise Cut",
       "offeredCard": "Calculated Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Calculated Gamble discards entire hand — immediately after, Precise Cut hits for full 13 damage with 0 cards in hand. Natural sequence."
     },
     {
       "deckCard": "Strangle",
       "offeredCard": "Master Planner",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Master Planner makes every Skill gain Sly when played — each Skill played counts toward Strangle's 2 HP drain per card. Full Sly chain = 16+ HP bypass plus Strangle's 8 base damage."
     },
     {
       "deckCard": "Speedster",
       "offeredCard": "Acrobatics",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Acrobatics draws 3 — with Speedster each draw pings for 2 AoE = 6 free AoE from one card. Stack multiple Acrobatics for rapid AoE accumulation."
     },
     {
@@ -14026,7 +14050,7 @@ const DB = {
     {
       "deckCard": "Up My Sleeve",
       "offeredCard": "Accuracy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Up My Sleeve generates 3 Shivs that get cheaper each cast — all 3 get Accuracy's full damage bonus. Eventually free repeatable Shiv supply."
     },
     {
@@ -14104,13 +14128,13 @@ const DB = {
     {
       "deckCard": "Knife Trap",
       "offeredCard": "Serpent Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Knife Trap plays every Shiv in exhaust pile — Serpent Form deals 4 damage per card played. Playing 15-20 Shivs via Knife Trap = 60-80 passive damage from Serpent Form simultaneously."
     },
     {
       "deckCard": "Serpent Form",
       "offeredCard": "Knife Trap",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Knife Trap fires all exhaust Shivs — each Shiv played procs Serpent Form's 4 damage. 15 Shivs = 60 extra damage from Serpent Form on top of Shiv damage."
     },
     {
@@ -14122,7 +14146,7 @@ const DB = {
     {
       "deckCard": "Hand Trick",
       "offeredCard": "Burst",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "PCGamesN guide: Hand Trick adds Sly to a Skill in hand — if you land Sly on Burst, discarding it plays Burst for free. Free next-Skill-plays-twice is explosive value."
     },
     {
@@ -14134,7 +14158,7 @@ const DB = {
     {
       "deckCard": "Haze",
       "offeredCard": "Tools Of The Trade",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Haze is Sly — Tools of the Trade's passive discard triggers Haze for free every turn applying 4 AoE Poison. Core Sly+Poison overlap combo."
     },
     {
@@ -14146,7 +14170,7 @@ const DB = {
     {
       "deckCard": "Nightmare",
       "offeredCard": "Wraith Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Nightmare creates 3 copies of Wraith Form — play all three for 6 turns of Intangible. Near-invincible for multiple turns. Dualshockers guide calls this game-winning."
     },
     {
@@ -14176,25 +14200,25 @@ const DB = {
     {
       "deckCard": "The Smith",
       "offeredCard": "Sword Sage",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "The Smith maxes Forge — Sword Sage adds an extra hit at that damage, often doubling total output."
     },
     {
       "deckCard": "Sword Sage",
       "offeredCard": "The Smith",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Sword Sage adds extra Sovereign Blade hit — The Smith makes that hit enormous."
     },
     {
       "deckCard": "The Smith",
       "offeredCard": "Seeking Edge",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "The Smith builds massive Sovereign Blade damage — Seeking Edge makes it hit all enemies simultaneously."
     },
     {
       "deckCard": "Seeking Edge",
       "offeredCard": "The Smith",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Seeking Edge enables AoE Sovereign Blade — The Smith makes that AoE lethal."
     },
     {
@@ -14212,13 +14236,13 @@ const DB = {
     {
       "deckCard": "Decisions, Decisions",
       "offeredCard": "Reflect",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Decisions Decisions triples Reflect — 3x17=51 Block in one play."
     },
     {
       "deckCard": "Reflect",
       "offeredCard": "Decisions, Decisions",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Reflect triples for 51 Block — Decisions Decisions is the ultimate Reflect multiplier."
     },
     {
@@ -14284,13 +14308,13 @@ const DB = {
     {
       "deckCard": "The Sealed Throne",
       "offeredCard": "Void Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "The Sealed Throne gives Star per card played — Void Form makes first 2 cards free, generating Stars at no cost."
     },
     {
       "deckCard": "Void Form",
       "offeredCard": "The Sealed Throne",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Void Form plays cards for free — The Sealed Throne converts every free play into a Star passively."
     },
     {
@@ -14314,13 +14338,13 @@ const DB = {
     {
       "deckCard": "Spectrum Shift",
       "offeredCard": "Arsenal",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Spectrum Shift creates a free Colorless card each turn — Arsenal converts each Colorless played into permanent Strength."
     },
     {
       "deckCard": "Arsenal",
       "offeredCard": "Spectrum Shift",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Arsenal gains Strength per Colorless card played — Spectrum Shift provides a free Colorless every single turn."
     },
     {
@@ -14398,13 +14422,13 @@ const DB = {
     {
       "deckCard": "Know Thy Place",
       "offeredCard": "Comet",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Know Thy Place applies Vulnerable (double damage) then Exhausts — Comet hits for 33 damage, effectively 66 against a Vulnerable enemy."
     },
     {
       "deckCard": "Comet",
       "offeredCard": "Know Thy Place",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Comet is a massive 33 damage nuke — Know Thy Place doubles that with Vulnerable and Weak for near-lethal hits."
     },
     {
@@ -14434,13 +14458,13 @@ const DB = {
     {
       "deckCard": "Meteor Shower",
       "offeredCard": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Meteor Shower applies 2 Weak and 2 Vulnerable to all enemies — Seven Stars then deals 7x7=49 AoE hits per enemy at doubled damage."
     },
     {
       "deckCard": "Seven Stars",
       "offeredCard": "Meteor Shower",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Seven Stars deals massive multi-hit AoE — Meteor Shower first debuffs all enemies with Vulnerable and Weak."
     },
     {
@@ -14458,13 +14482,13 @@ const DB = {
     {
       "deckCard": "Monarch's Gaze",
       "offeredCard": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Monarch's Gaze reduces Strength per attack — Seven Stars hits 7x7=49 times, draining enormous enemy Strength each turn."
     },
     {
       "deckCard": "Seven Stars",
       "offeredCard": "Monarch's Gaze",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Seven Stars is 49 AoE hits — Monarch's Gaze turns each hit into Strength drain, stacking with itself massively."
     },
     {
@@ -14482,13 +14506,13 @@ const DB = {
     {
       "deckCard": "Black Hole",
       "offeredCard": "Royal Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Royal Gamble dumps 9 Stars — Black Hole deals 3 AoE per Star, converting 9 Stars into 27 AoE damage instantly."
     },
     {
       "deckCard": "Royal Gamble",
       "offeredCard": "Black Hole",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Black Hole converts Star spending into AoE damage — Royal Gamble dumps 9 Stars for an immediate 27 AoE burst."
     },
     {
@@ -14608,13 +14632,13 @@ const DB = {
     {
       "deckCard": "Terraforming",
       "offeredCard": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Terraforming gives 6 Vigor — Seven Stars hits 49 times across all enemies, applying that Strength on every single hit for enormous burst."
     },
     {
       "deckCard": "Seven Stars",
       "offeredCard": "Terraforming",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Seven Stars is 49 multi-hit AoE — Terraforming grants 6 temporary Strength that multiplies across all those hits."
     },
     {
@@ -14644,13 +14668,13 @@ const DB = {
     {
       "deckCard": "Capture Spirit",
       "offeredCard": "Death March",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Capture Spirit adds 3 Souls to Draw Pile — Death March deals 3 bonus damage per card drawn this turn, turning Soul draws into massive damage."
     },
     {
       "deckCard": "Death March",
       "offeredCard": "Capture Spirit",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Death March scales with cards drawn — Capture Spirit reliably generates 3 Souls per play, fueling huge Death March turns."
     },
     {
@@ -14680,13 +14704,13 @@ const DB = {
     {
       "deckCard": "Devour Life",
       "offeredCard": "Capture Spirit",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Devour Life Summons 1 per Soul played — Capture Spirit generates 3 Souls, giving 3 free Summons plus growing Osty each time."
     },
     {
       "deckCard": "Capture Spirit",
       "offeredCard": "Devour Life",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Capture Spirit provides reliable Soul income — Devour Life converts every Soul into Osty growth, linking Soul and Osty engines."
     },
     {
@@ -14728,25 +14752,25 @@ const DB = {
     {
       "deckCard": "Demesne",
       "offeredCard": "Parse",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Demesne gives +1 draw per turn passively — Parse is an Ethereal draw 3, and Demesne already drew 1 extra making Parse effectively draw 4 in context."
     },
     {
       "deckCard": "Parse",
       "offeredCard": "Demesne",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Parse is free Ethereal draw 3 — Demesne's passive +1 draw means turning every turn into massive card advantage when Parse cycles through."
     },
     {
       "deckCard": "Pagestorm",
       "offeredCard": "Parse",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Parse is Ethereal — Pagestorm draws 1 whenever you draw an Ethereal card, making Parse effectively draw 4 total cards for 0 Energy."
     },
     {
       "deckCard": "Parse",
       "offeredCard": "Pagestorm",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Pagestorm triggers on Ethereal draws — Parse being Ethereal itself draws 3, and Pagestorm adds 1 more for free."
     },
     {
@@ -14812,13 +14836,13 @@ const DB = {
     {
       "deckCard": "Debilitate",
       "offeredCard": "Putrefy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Debilitate makes Weak and Vulnerable twice as effective for 3 turns — Putrefy applies 2 of each, effectively making enemy take 4x debuff impact."
     },
     {
       "deckCard": "Putrefy",
       "offeredCard": "Debilitate",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Putrefy applies Weak + Vulnerable — Debilitate then doubles both, making attacks during next 3 turns deal enormous bonus damage."
     },
     {
@@ -14920,13 +14944,13 @@ const DB = {
     {
       "deckCard": "Neurosurge",
       "offeredCard": "Borrowed Time",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Neurosurge gives 3 Energy and 2 draw — Borrowed Time gains Energy for 3 self-Doom, and Neurosurge's Energy fuels playing both in one explosive turn."
     },
     {
       "deckCard": "Borrowed Time",
       "offeredCard": "Neurosurge",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Borrowed Time trades self-Doom for Energy — Neurosurge's 3 Energy and draw enable playing multiple high-cost cards including Borrowed Time itself."
     },
     {
@@ -14956,13 +14980,13 @@ const DB = {
     {
       "deckCard": "Sic 'Em",
       "offeredCard": "Rattle",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rattle hits again for each Osty attack this turn — Sic 'Em generates Summon 2 per Osty hit, and each Rattle hit triggers more Summon stacking."
     },
     {
       "deckCard": "Rattle",
       "offeredCard": "Sic 'Em",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Sic 'Em summons 2 per Osty hit this turn — Rattle's multi-hit triggers Sic 'Em repeatedly, generating enormous Summon totals per turn."
     },
     {
@@ -14980,13 +15004,13 @@ const DB = {
     {
       "deckCard": "Necro Mastery",
       "offeredCard": "Bone Shards",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Bone Shards deals 9 AoE and gives 9 Block then kills Osty — Necro Mastery makes ALL enemies lose HP equal to Osty's HP when he dies, adding enormous AoE on top."
     },
     {
       "deckCard": "Bone Shards",
       "offeredCard": "Necro Mastery",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Necro Mastery converts Osty death into enemy HP loss — Bone Shards kills Osty after dealing 9 AoE, and Necro Mastery adds Osty's full HP as bonus AoE."
     },
     {
@@ -15004,13 +15028,13 @@ const DB = {
     {
       "deckCard": "Protector",
       "offeredCard": "Reanimate",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Reanimate gives Osty +20 Max HP — Protector deals 10 damage plus Osty's Max HP, making Protector hit for 30+ damage with Reanimate's boost."
     },
     {
       "deckCard": "Reanimate",
       "offeredCard": "Protector",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Protector deals damage equal to Osty's Max HP — Reanimate adds 20 Max HP to Osty, directly increasing Protector's damage by 20."
     },
     {
@@ -15154,25 +15178,25 @@ const DB = {
     {
       "deckCard": "Echo Form",
       "offeredCard": "Signal Boost",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Signal Boost makes next Power play twice — Echo Form doubles Signal Boost itself, making the next Power play 3 times total."
     },
     {
       "deckCard": "Signal Boost",
       "offeredCard": "Echo Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Echo Form doubles the first card each turn — Signal Boost doubled means the next Power plays 3 times total."
     },
     {
       "deckCard": "Echo Form",
       "offeredCard": "Machine Learning",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Echo Form doubles Machine Learning — instead of +1 draw per turn, you get +2 draw per turn permanently."
     },
     {
       "deckCard": "Machine Learning",
       "offeredCard": "Echo Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Machine Learning gives +1 draw per turn — Echo Form doubles it to +2 draw, making every turn draw 7 cards."
     },
     {
@@ -15202,13 +15226,13 @@ const DB = {
     {
       "deckCard": "Signal Boost",
       "offeredCard": "Coolant",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Coolant doubled via Signal Boost gives 4 Block per unique Orb per turn — with 4 orbs, 16 free Block every turn."
     },
     {
       "deckCard": "Coolant",
       "offeredCard": "Signal Boost",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Signal Boost doubles the next Power — Coolant doubled means twice the Block per unique Orb passively every turn."
     },
     {
@@ -15226,13 +15250,13 @@ const DB = {
     {
       "deckCard": "Spinner",
       "offeredCard": "Shatter",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Spinner generates Glass orbs every turn — Shatter Evokes all Orbs for massive AoE, with Glass Orbs each dealing 8 AoE on Evoke."
     },
     {
       "deckCard": "Shatter",
       "offeredCard": "Spinner",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shatter Evokes all Orbs — Spinner ensures there's always at least 1 Glass Orb active for Shatter to Evoke for 8 AoE."
     },
     {
@@ -15286,13 +15310,13 @@ const DB = {
     {
       "deckCard": "Consuming Shadow",
       "offeredCard": "Loop",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Consuming Shadow auto-evokes leftmost Orb each turn — Loop triggers the rightmost Orb's passive. Together they give double passive Orb activation every turn."
     },
     {
       "deckCard": "Loop",
       "offeredCard": "Consuming Shadow",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Loop triggers rightmost Orb passive each turn — Consuming Shadow triggers leftmost. With both, every Orb slot passively activates twice per turn."
     },
     {
@@ -15310,13 +15334,13 @@ const DB = {
     {
       "deckCard": "Coolant",
       "offeredCard": "Rainbow",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rainbow channels Lightning, Frost, and Dark simultaneously — Coolant gives 2 Block per unique Orb, making Rainbow instantly add 6 Block per turn."
     },
     {
       "deckCard": "Rainbow",
       "offeredCard": "Coolant",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Coolant gives 2 Block per unique Orb — Rainbow provides all 3 major Orb types at once, giving 6+ Block per turn immediately."
     },
     {
@@ -15346,7 +15370,7 @@ const DB = {
     {
       "deckCard": "Genetic Algorithm",
       "offeredCard": "Echo Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Echo Form doubles the first card played — Genetic Algorithm doubled gains +6 Block permanently per play instead of +3. Scales twice as fast."
     },
     {
@@ -15376,13 +15400,13 @@ const DB = {
     {
       "deckCard": "Double Energy",
       "offeredCard": "Voltaic",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Double Energy maximizes Energy for the turn — Voltaic channels Lightning equal to total Lightning Channeled this combat, flooding Orb slots for turn-end damage."
     },
     {
       "deckCard": "Voltaic",
       "offeredCard": "Double Energy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Voltaic channels massive Lightning in late game — Double Energy ensures you have maximum Energy to play both Voltaic and other cards on the same turn."
     },
     {
@@ -15400,13 +15424,13 @@ const DB = {
     {
       "deckCard": "Shatter",
       "offeredCard": "Consuming Shadow",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Consuming Shadow builds large Dark Orbs over turns — Shatter Evokes all Orbs including the accumulated Dark for massive single-target damage."
     },
     {
       "deckCard": "Feral",
       "offeredCard": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Claw is a 0-cost Attack — Feral returns the first one played each turn to hand, effectively giving Claw an extra free play every turn."
     },
     {
@@ -15436,13 +15460,13 @@ const DB = {
     {
       "deckCard": "Smokestack",
       "offeredCard": "TURBO",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "TURBO gains 2 Energy and adds a Void — Smokestack deals 5 AoE each time a Status is created. TURBO creates Status every play, giving 5 free AoE per TURBO."
     },
     {
       "deckCard": "TURBO",
       "offeredCard": "Smokestack",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Smokestack deals 5 AoE per Status created — TURBO creates a Void every play, triggering Smokestack for 5 AoE while giving 2 Energy."
     },
     {
@@ -15526,13 +15550,13 @@ const DB = {
     {
       "deckCard": "Rainbow",
       "offeredCard": "Compile Driver",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rainbow channels Lightning, Frost, and Dark at once — Compile Driver draws 1 per unique Orb, so Rainbow immediately gives Compile Driver a 3-card draw."
     },
     {
       "deckCard": "Compile Driver",
       "offeredCard": "Rainbow",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Compile Driver draws per unique Orb — Rainbow provides all 3 major Orb types at once, making Compile Driver draw 3 cards in one play."
     },
     {
@@ -15550,13 +15574,13 @@ const DB = {
     {
       "deckCard": "Quadcast",
       "offeredCard": "Consuming Shadow",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Consuming Shadow builds large Dark Orbs — Quadcast Evokes 4 times, dealing 4x the accumulated Dark damage in one play."
     },
     {
       "deckCard": "Consuming Shadow",
       "offeredCard": "Quadcast",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Quadcast delivers 4 Evokes — Consuming Shadow ensures Dark Orbs are always large and always being built for Quadcast to consume."
     },
     {
@@ -15610,25 +15634,25 @@ const DB = {
     {
       "deckCard": "Hailstorm",
       "offeredCard": "Chill",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Chill channels Frost for each enemy (multi-enemy = multiple Frost) — Hailstorm deals 6 AoE whenever Frost is active. Chill guarantees Frost immediately."
     },
     {
       "deckCard": "Chill",
       "offeredCard": "Hailstorm",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hailstorm deals 6 AoE each turn when Frost active — Chill channels Frost for every enemy at once, instantly activating Hailstorm in any fight."
     },
     {
       "deckCard": "Panache",
       "offeredCard": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Claw builds play 10-15 cards per turn — Panache deals 10 AoE for every 5, meaning 20-30 free AoE damage on top of Claw scaling."
     },
     {
       "deckCard": "Claw",
       "offeredCard": "Panache",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Panache triggers every 5 cards played — Claw builds naturally play 10+ cards per turn, making Panache deal 20+ free AoE per turn."
     },
     {
@@ -15658,13 +15682,13 @@ const DB = {
     {
       "deckCard": "Apotheosis",
       "offeredCard": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Apotheosis upgrades all cards including Corruption — Corruption+ makes ALL Skills cost 0 instead of just reducing cost, turning Exhaust builds completely free."
     },
     {
       "deckCard": "Corruption",
       "offeredCard": "Apotheosis",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption is dramatically stronger upgraded — Apotheosis delivers that upgrade mid-combat, making all Skills free for the rest of the fight."
     },
     {
@@ -15694,25 +15718,25 @@ const DB = {
     {
       "deckCard": "Shockwave",
       "offeredCard": "Body Slam",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shockwave applies Vulnerable to all enemies — Body Slam deals damage equal to Block, and Vulnerable doubles that damage on affected enemies."
     },
     {
       "deckCard": "Body Slam",
       "offeredCard": "Shockwave",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shockwave applies 3 Vulnerable to all enemies — Body Slam hits Vulnerable targets for double damage, turning even moderate Block into massive damage."
     },
     {
       "deckCard": "Shockwave",
       "offeredCard": "Comet",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shockwave applies 3 Vulnerable to all enemies — Comet deals 33 damage on an already-Vulnerable target effectively deals 66, plus its own 3 Vulnerable stacks further."
     },
     {
       "deckCard": "Comet",
       "offeredCard": "Shockwave",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Comet already applies 3 Vulnerable — Shockwave pre-stacks another 3 Vulnerable for 6 total, making Comet land for effectively triple its listed damage."
     },
     {
@@ -15742,13 +15766,13 @@ const DB = {
     {
       "deckCard": "Shockwave",
       "offeredCard": "Debilitate",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shockwave applies 3 Vulnerable AoE — Debilitate then doubles Vulnerable effectiveness for 3 turns, making enemies take 4x Vulnerable damage total."
     },
     {
       "deckCard": "Debilitate",
       "offeredCard": "Shockwave",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Debilitate doubles Weak and Vulnerable effectiveness — Shockwave first applies both to all enemies, making Debilitate immediately potent."
     },
     {
@@ -15766,13 +15790,13 @@ const DB = {
     {
       "deckCard": "Secret Weapon",
       "offeredCard": "All for One",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Secret Weapon tutors any Attack from Draw Pile — in Claw builds, this guarantees finding All for One for the decisive Claw-retrieval turn."
     },
     {
       "deckCard": "All for One",
       "offeredCard": "Secret Weapon",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "All for One is the Claw build's win condition — Secret Weapon ensures you can always find and play it exactly when needed."
     },
     {
@@ -15784,25 +15808,25 @@ const DB = {
     {
       "deckCard": "Secret Technique",
       "offeredCard": "Barricade",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Secret Technique tutors any Skill — finding Barricade on demand guarantees the Block-retention engine is always accessible."
     },
     {
       "deckCard": "Barricade",
       "offeredCard": "Secret Technique",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Barricade is Ironclad Block build's engine — Secret Technique guarantees you can find it turn 1 of any fight."
     },
     {
       "deckCard": "Secret Technique",
       "offeredCard": "Void Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Secret Technique tutors any Skill — finding Void Form on demand guarantees the Regent's most powerful engine is always playable."
     },
     {
       "deckCard": "Void Form",
       "offeredCard": "Secret Technique",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Void Form is Regent's S-tier engine — Secret Technique ensures you always find it regardless of draw order."
     },
     {
@@ -15832,13 +15856,13 @@ const DB = {
     {
       "deckCard": "Stratagem",
       "offeredCard": "Mayhem",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Stratagem lets you choose a card from Draw Pile each shuffle — Mayhem plays the top card for free. Together: choose what Mayhem plays every cycle."
     },
     {
       "deckCard": "Mayhem",
       "offeredCard": "Stratagem",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Mayhem plays the top card free each turn — Stratagem controls what rises to the top each shuffle, making Mayhem always play your best card."
     },
     {
@@ -15886,13 +15910,13 @@ const DB = {
     {
       "deckCard": "Scrawl",
       "offeredCard": "Flechettes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Scrawl fills hand completely — Flechettes deals damage per Skill in Hand. A full hand of Skills after Scrawl makes Flechettes deal massive damage."
     },
     {
       "deckCard": "Flechettes",
       "offeredCard": "Scrawl",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Flechettes scales with Skills in Hand — Scrawl draws until Hand is full, maximizing Flechettes' damage in one play."
     },
     {
@@ -15928,7 +15952,7 @@ const DB = {
     {
       "deckCard": "Prep Time",
       "offeredCard": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Prep Time gives 4 Vigor at turn start — Seven Stars hits 7x7=49 times, applying Vigor to each hit for +196 bonus damage per Seven Stars cast."
     },
     {
@@ -16012,37 +16036,37 @@ const DB = {
     {
       "deckCard": "Hidden Gem",
       "offeredCard": "Defragment",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hidden Gem gives Replay 2 — Defragment with Replay 2 gives 3 Focus in one play instead of 1. Fastest possible Focus acceleration for Orb builds."
     },
     {
       "deckCard": "Defragment",
       "offeredCard": "Hidden Gem",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Defragment gains 1 Focus — Hidden Gem's Replay 2 makes it play 3 times, giving 3 Focus instantly. Signal Boost can only double it; Hidden Gem triples it."
     },
     {
       "deckCard": "Hidden Gem",
       "offeredCard": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hidden Gem gives Replay 2 — Claw with Replay 2 plays 3 times, raising all Claw damage by 6 per draw instead of 2. Triples scaling per Claw drawn."
     },
     {
       "deckCard": "Claw",
       "offeredCard": "Hidden Gem",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Claw scales all Claw damage by 2 per play — Hidden Gem's Replay 2 makes each Claw drawn increase all Claw damage by 6 instead of 2."
     },
     {
       "deckCard": "Hidden Gem",
       "offeredCard": "Undeath",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Hidden Gem gives Replay 2 — Undeath with Replay 2 plays 3 times, adding 3 copies to Discard instead of 1. Block generation triples immediately."
     },
     {
       "deckCard": "Undeath",
       "offeredCard": "Hidden Gem",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Undeath copies itself into Discard each play — Hidden Gem's Replay 2 makes it play 3 times, flooding Discard with 3 copies at once for explosive Block scaling."
     },
     {
@@ -16114,13 +16138,13 @@ const DB = {
     {
       "deckCard": "Mayhem",
       "offeredCard": "Nostalgia",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Nostalgia puts first card played on top of Draw — Mayhem plays the top card for free at turn start. Together: choose your best card with Nostalgia, then Mayhem plays it for free next turn."
     },
     {
       "deckCard": "Nostalgia",
       "offeredCard": "Mayhem",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Mayhem plays Draw Pile top card free each turn — Nostalgia controls what's on top, making Mayhem always play your best card rather than a random one."
     },
     {
@@ -16336,13 +16360,13 @@ const DB = {
     {
       "deckCard": "Scrawl",
       "offeredCard": "Death March",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Scrawl draws cards until hand is full (5-7 draws) — Death March deals 3 bonus damage per card drawn this turn. Scrawl alone adds 15-21 damage to Death March for 0 Energy."
     },
     {
       "deckCard": "Death March",
       "offeredCard": "Scrawl",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Death March scales with cards drawn this turn — Scrawl draws until hand is full for 0 Energy, adding up to 21 bonus damage to Death March in one play."
     }
   ],
@@ -16354,15 +16378,15 @@ const DB = {
     "Inflame": -1.5,
     "Dark Embrace": -1.5,
     "Feel No Pain": -1.5,
-    "Rupture": -1.0,
+    "Rupture": -1,
     "Juggernaut": -1.5,
-    "Feed": -2.0,
-    "Combust": -2.0,
+    "Feed": -2,
+    "Combust": -2,
     "Well-Laid Plans": -2.5,
-    "Noxious Fumes": -1.0,
-    "After Image": -2.0,
+    "Noxious Fumes": -1,
+    "After Image": -2,
     "Envenom": -1.5,
-    "Burst": -2.0,
+    "Burst": -2,
     "Nightmare": -2.5,
     "Echo Form": -2.5,
     "Defragment": -0.5,
@@ -16370,15 +16394,15 @@ const DB = {
     "Biased Cognition": -2.5,
     "Static Discharge": -1.5,
     "All For One": -1.5,
-    "Capacitor": -1.0,
+    "Capacitor": -1,
     "Void Form": -2.5,
-    "Genesis": -2.0,
+    "Genesis": -2,
     "Bombardment": -2.5,
     "Sealed Throne": -2.5,
     "Demesne": -2.5,
     "Haunt": -0.5,
     "Devour Life": -1.5,
-    "End Of Days": -2.0,
+    "End Of Days": -2,
     "Inferno": -2.5,
     "Aggression": -2.5,
     "Stampede": -2.5,
@@ -16388,12 +16412,12 @@ const DB = {
     "Colossus": -2.5,
     "Unmovable": -2.5,
     "Expect A Fight": -2.5,
-    "Vicious": -2.0,
-    "Evil Eye": -2.0,
-    "Brand": -2.0,
-    "Stoke": -2.0,
+    "Vicious": -2,
+    "Evil Eye": -2,
+    "Brand": -2,
+    "Stoke": -2,
     "Thrash": -1.5,
-    "Primal Force": -2.0,
+    "Primal Force": -2,
     "Entrench": -1.5,
     "Impervious": -1.5,
     "Second Wind": -1.5,
@@ -16882,10 +16906,6 @@ const DB = {
     },
     {
       "n": "Flex",
-      "c": "ironclad"
-    },
-    {
-      "n": "Grapple",
       "c": "ironclad"
     },
     {
@@ -19208,7 +19228,7 @@ const DB = {
       "syn": [
         "gold"
       ],
-      "notes": "Enemies drop 10 extra Gold. Compounds over a run.",
+      "notes": "[Buffed v0.100.0] Enemies now drop 15 extra Gold (was 10). No longer appears in shops (gold-generating relic).",
       "builds": [
         "any"
       ],
@@ -19295,7 +19315,7 @@ const DB = {
       "syn": [
         "healing"
       ],
-      "notes": "Heal 15 HP every 5 cards added to deck. Penalizes small decks.",
+      "notes": "[Buffed v0.100.0] Heal 20 HP every 5 cards added to deck (was 15). Penalizes small decks but rewards deck-building.",
       "builds": [
         "any"
       ],
@@ -19509,7 +19529,7 @@ const DB = {
       "syn": [
         "draw"
       ],
-      "notes": "Draw a card whenever you shuffle. Good in fast-cycling decks.",
+      "notes": "[Reworked v0.101.0] Common — Every 3 turns, draw 1 card. Predictable cadence (was: draw on every shuffle). Less swingy in tiny decks.",
       "builds": [
         "sly",
         "claw"
@@ -19535,12 +19555,12 @@ const DB = {
       "id": "Permafrost",
       "tier": "C",
       "char": "any",
-      "rarity": "common",
+      "rarity": "uncommon",
       "syn": [
         "block",
         "strength"
       ],
-      "notes": "First Power played per combat: gain 6 Block.",
+      "notes": "[Buffed v0.100.0; rarity nerf v0.101.0] First Power played per combat: gain 7 Block (was 6). Rarity moved Common → Uncommon (less common in rewards).",
       "builds": [
         "strength",
         "orb",
@@ -19614,7 +19634,7 @@ const DB = {
           "tags": [
             "strike"
           ],
-          "bonus": 2.0
+          "bonus": 2
         }
       ]
     },
@@ -19624,7 +19644,7 @@ const DB = {
       "char": "any",
       "rarity": "common",
       "syn": [],
-      "notes": "Get a random potion when Resting.",
+      "notes": "Get a random potion when Resting. [Rarity note v0.101.0] Stays Common, now appears more often relative to other rarities.",
       "builds": [
         "any"
       ],
@@ -19848,7 +19868,7 @@ const DB = {
             "orb",
             "focus"
           ],
-          "bonus": 1.0
+          "bonus": 1
         }
       ]
     },
@@ -19879,11 +19899,11 @@ const DB = {
       "id": "Bag of Marbles",
       "tier": "B",
       "char": "any",
-      "rarity": "uncommon",
+      "rarity": "common",
       "syn": [
         "vulnerable"
       ],
-      "notes": "Apply 1 Vulnerable to ALL enemies at combat start.",
+      "notes": "Apply 1 Vulnerable to ALL enemies at combat start. [Rarity v0.101.0] Uncommon → Common; appears more often.",
       "builds": [
         "strength",
         "claw",
@@ -19910,11 +19930,11 @@ const DB = {
       "id": "Bellows",
       "tier": "A",
       "char": "any",
-      "rarity": "uncommon",
+      "rarity": "rare",
       "syn": [
         "upgrade"
       ],
-      "notes": "First hand each combat is Upgraded. Free upgrades every fight.",
+      "notes": "First hand each combat is Upgraded. Free upgrades every fight. [Rarity v0.101.0] Uncommon → Rare; less common in rewards but unchanged effect.",
       "builds": [
         "orb",
         "exhaust",
@@ -19939,7 +19959,7 @@ const DB = {
       "syn": [
         "gold"
       ],
-      "notes": "Gain 20% extra Gold.",
+      "notes": "[Buffed v0.100.0] Gain 25% extra Gold (was 20%). No longer appears in shops (gold-generating relic).",
       "builds": [
         "any"
       ],
@@ -20394,7 +20414,7 @@ const DB = {
       "syn": [
         "healing"
       ],
-      "notes": "Heal 4 HP per ? room.",
+      "notes": "[Buffed v0.100.0] Heal 5 HP per ? room (was 4). Compounds nicely on event-heavy maps.",
       "builds": [
         "any"
       ],
@@ -20404,11 +20424,11 @@ const DB = {
       "id": "Red Mask",
       "tier": "S",
       "char": "any",
-      "rarity": "uncommon",
+      "rarity": "common",
       "syn": [
         "weak"
       ],
-      "notes": "Apply 1 Weak to ALL enemies at combat start.",
+      "notes": "Apply 1 Weak to ALL enemies at combat start. [Rarity v0.101.0] Uncommon → Common; appears more often. Still S-tier value.",
       "builds": [
         "sly",
         "poison",
@@ -20497,7 +20517,7 @@ const DB = {
       "syn": [
         "upgrade"
       ],
-      "notes": "Boss fights: Upgrade 3 random Draw Pile cards.",
+      "notes": "[Reworked v0.100.0] Now works in ALL combats but only Upgrades 2 random Draw Pile cards (was: 3 cards in Boss combats only). Far more reliable per-fight value.",
       "builds": [
         "stars",
         "orb",
@@ -20648,7 +20668,7 @@ const DB = {
             "sly",
             "discard"
           ],
-          "bonus": 1.0
+          "bonus": 1
         },
         {
           "tags": [
@@ -20710,7 +20730,7 @@ const DB = {
       "syn": [
         "block"
       ],
-      "notes": "Gain 2 Block whenever you create a Colorless card. Niche unless running Colorless-creation.",
+      "notes": "[Updated v0.103.2] Now grants Block whenever you create a card (broader trigger, mirrors Arsenal). Pairs with Arsenal for simultaneous Strength + Block on each card creation.",
       "builds": [
         "stars"
       ],
@@ -21147,9 +21167,9 @@ const DB = {
       "id": "Lasting Candy",
       "tier": "B",
       "char": "any",
-      "rarity": "rare",
+      "rarity": "uncommon",
       "syn": [],
-      "notes": "Every other combat: extra Power in card rewards.",
+      "notes": "Every other combat: extra Power in card rewards. [Rarity v0.101.0] Rare → Uncommon; appears more often.",
       "builds": [
         "orb",
         "exhaust",
@@ -21250,7 +21270,7 @@ const DB = {
           "tags": [
             "power"
           ],
-          "bonus": 1.0
+          "bonus": 1
         }
       ]
     },
@@ -21568,7 +21588,7 @@ const DB = {
           "tags": [
             "poison"
           ],
-          "bonus": 1.0
+          "bonus": 1
         },
         {
           "tags": [
@@ -21592,7 +21612,7 @@ const DB = {
       "char": "any",
       "rarity": "rare",
       "syn": [],
-      "notes": "Start combat: add a random free card to Hand.",
+      "notes": "[Updated v0.102.0] Start combat: add a random Free-to-Play card to Hand (only lasts until end of turn). Wording change: 'Free to Play' instead of 'Costs 0 Energy'.",
       "builds": [
         "any"
       ],
@@ -21780,7 +21800,7 @@ const DB = {
             "sly",
             "discard"
           ],
-          "bonus": 1.0
+          "bonus": 1
         },
         {
           "tags": [
@@ -22016,7 +22036,7 @@ const DB = {
             "zero_cost",
             "claw"
           ],
-          "bonus": 1.0
+          "bonus": 1
         },
         {
           "tags": [
@@ -22040,13 +22060,13 @@ const DB = {
     },
     "BOOMING_CONCH": {
       "id": "Booming Conch",
-      "tier": "B",
+      "tier": "A",
       "char": "any",
       "rarity": "ancient",
       "syn": [
         "draw"
       ],
-      "notes": "Draw 2 extra cards at start of Elite combats.",
+      "notes": "[Buffed v0.104.0] Draw extra cards on the first turn AND gain 1 Energy at the start of Elite combats. Now a real Neow pick on elite-heavy maps.",
       "builds": [
         "any"
       ],
@@ -22122,7 +22142,7 @@ const DB = {
       "char": "any",
       "rarity": "ancient",
       "syn": [],
-      "notes": "Transform 1 Strike and 1 Defend; lose 10 Max HP.",
+      "notes": "Transform 1 Strike and 1 Defend; lose 10 Max HP. [Nerfed v0.100.0] Blessing's max HP loss 10→12.",
       "builds": [
         "any"
       ],
@@ -22210,7 +22230,7 @@ const DB = {
       "char": "any",
       "rarity": "ancient",
       "syn": [],
-      "notes": "Remove 2 cards from deck; take 13 damage.",
+      "notes": "Remove 2 cards from deck; take 13 damage. [Nerfed v0.100.0] Blessing's self-damage 13→16.",
       "builds": [
         "sly",
         "claw"
@@ -22536,7 +22556,7 @@ const DB = {
             "block",
             "block_conversion"
           ],
-          "bonus": 1.0
+          "bonus": 1
         }
       ]
     },
@@ -22614,11 +22634,11 @@ const DB = {
     },
     "NUTRITIOUS_SOUP": {
       "id": "Nutritious Soup",
-      "tier": "B",
+      "tier": "A",
       "char": "any",
       "rarity": "ancient",
       "syn": [],
-      "notes": "Enchant all Strikes with Tezcatara's Ember.",
+      "notes": "[Buffed v0.104.0] Strikes cost 0, are Eternal, AND deal +3 damage. Strike-payoff decks (Perfected Strike, Pommel Strike, Strike count) get a major lift.",
       "builds": [
         "strike",
         "strength"
@@ -22808,7 +22828,7 @@ const DB = {
       "syn": [
         "energy_gain"
       ],
-      "notes": "The 5th card you play each turn is free.",
+      "notes": "[Clarified v0.103.2] The 5th card you play 'from your hand' each turn is free. Auto-played cards (e.g. via Whispering Earring) do not count.",
       "builds": [
         "claw",
         "sly"
@@ -22869,7 +22889,7 @@ const DB = {
       "char": "any",
       "rarity": "ancient",
       "syn": [],
-      "notes": "Mark 7 random combats. Enemies in those rooms have 1 HP.",
+      "notes": "[Buffed v0.102.0] Now also affects restocked Axebots and any enemies that enter combat mid-fight. Strong vs. Axebot encounters and re-summon fights.",
       "builds": [
         "any"
       ],
@@ -23101,7 +23121,7 @@ const DB = {
       "char": "any",
       "rarity": "ancient",
       "syn": [],
-      "notes": "Choose 3 Attacks in deck; Enchant them with Instinct.",
+      "notes": "Choose 3 Attacks in deck; Enchant them with Instinct. [Changed v0.100.0] Instinct enchantment no longer reduces cost; instead doubles damage on enchanted Attacks.",
       "builds": [
         "strength",
         "claw",
@@ -23261,7 +23281,7 @@ const DB = {
       "char": "any",
       "rarity": "ancient",
       "syn": [],
-      "notes": "Remove 5 cards from deck. Add Folly.",
+      "notes": "Remove 5 cards from deck. Add Folly. [Nerfed v0.100.0] Cards removed 5→3; Folly curse now Ethereal.",
       "builds": [
         "sly",
         "claw"
@@ -23585,7 +23605,7 @@ const DB = {
           "tags": [
             "x_cost"
           ],
-          "bonus": 1.0
+          "bonus": 1
         }
       ]
     },
@@ -24283,7 +24303,7 @@ const DB = {
       "syn": [
         "scaling"
       ],
-      "notes": "Start of turn: play a copy of your last played Attack or Skill. Free extra card every turn.",
+      "notes": "[Updated v0.102.0] Plays of X-cost copies now use your CURRENT energy for X (not the energy spent last play). Significantly more flexible.",
       "builds": [
         "poison",
         "strength",
@@ -24296,7 +24316,7 @@ const DB = {
             "damage",
             "scaling"
           ],
-          "bonus": 1.0
+          "bonus": 1
         },
         {
           "tags": [
@@ -24605,6 +24625,87 @@ const DB = {
       "rarity": "special",
       "syn": [],
       "notes": "It's a circlet. Appears when no more relics are available.",
+      "builds": [
+        "any"
+      ],
+      "scoreEffects": []
+    },
+    "HEFTY_TABLET": {
+      "id": "Hefty Tablet",
+      "tier": "A",
+      "char": "any",
+      "rarity": "ancient",
+      "syn": [
+        "scaling",
+        "card_quality"
+      ],
+      "notes": "[Added v0.103.0] Neow relic: Choose 1 of 3 Rare cards to add to your Deck. Add 1 Injury to your Deck. A free Rare pick at the cost of one Curse — almost always worth it for build acceleration.",
+      "builds": [
+        "any"
+      ],
+      "scoreEffects": []
+    },
+    "NEOWS_TALISMAN": {
+      "id": "Neow's Talisman",
+      "tier": "B",
+      "char": "any",
+      "rarity": "ancient",
+      "syn": [
+        "strike",
+        "defend"
+      ],
+      "notes": "[Added v0.103.0] Neow relic: Upgrade 1 of your starting Strikes and 1 of your starting Defends. Modest but always useful — improves your two most-played early cards permanently.",
+      "builds": [
+        "any",
+        "strike"
+      ],
+      "scoreEffects": [
+        {
+          "tags": [
+            "strike"
+          ],
+          "bonus": 0.2
+        }
+      ]
+    },
+    "NEOWS_BONES": {
+      "id": "Neow's Bones",
+      "tier": "S",
+      "char": "any",
+      "rarity": "ancient",
+      "syn": [
+        "neow_relic",
+        "scaling"
+      ],
+      "notes": "[Added v0.103.0] Neow relic: On pickup, gain 2 random Neow Relics + 1 random Curse. Net +2 Neow relics for 1 Curse — borderline always-take when you don't have a strong opening relic.",
+      "builds": [
+        "any"
+      ],
+      "scoreEffects": []
+    },
+    "PHIAL_HOLSTER": {
+      "id": "Phial Holster",
+      "tier": "S",
+      "char": "any",
+      "rarity": "ancient",
+      "syn": [
+        "potion"
+      ],
+      "notes": "[Added v0.103.0] Neow relic: On pickup, gain +1 Potion Slot AND 2 random potions. Massive front-loaded value plus a permanent extra slot for the rest of the run.",
+      "builds": [
+        "any"
+      ],
+      "scoreEffects": []
+    },
+    "WINGED_BOOTS": {
+      "id": "Winged Boots",
+      "tier": "A",
+      "char": "any",
+      "rarity": "ancient",
+      "syn": [
+        "map_route"
+      ],
+      "notes": "[Added v0.103.0] Neow relic: 3 charges to ignore paths when choosing the next room. Use to grab off-path Elites, shops, or key event rooms — major routing flexibility.",
       "builds": [
         "any"
       ],
@@ -25763,13 +25864,18 @@ const DB = {
     {
       "n": "Circlet",
       "c": "any"
-    }
+    },
+    "Hefty Tablet",
+    "Neow's Talisman",
+    "Neow's Bones",
+    "Phial Holster",
+    "Winged Boots"
   ],
   "relicCombos": [
     {
       "relic": "Charon's Ashes",
       "card": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Corruption Exhausts all Skills — Charon's Ashes deals 3 AoE per Exhaust. Every free Skill play becomes 3 free AoE damage, stacking to 20-30+ AoE per turn."
     },
     {
@@ -25829,7 +25935,7 @@ const DB = {
     {
       "relic": "Cloak Clasp",
       "card": "Juggernaut",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Cloak Clasp gains 1 Block per card in Hand at turn end — Juggernaut deals damage whenever you gain Block. Cloak Clasp's end-of-turn Block triggers Juggernaut for free damage every turn."
     },
     {
@@ -25853,7 +25959,7 @@ const DB = {
     {
       "relic": "Pael's Legion",
       "card": "Barricade",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Pael's Legion doubles Block from a card — Barricade retains that doubled Block. Pael's Legion fires every 3 turns doubling your Block, and Barricade keeps the doubled total permanently."
     },
     {
@@ -25865,7 +25971,7 @@ const DB = {
     {
       "relic": "Vambrace",
       "card": "Impervious",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Vambrace doubles the first Block you gain from a card each combat — Impervious gives 30 Block as your first Block card. With Vambrace, Impervious opens every fight with 60 Block."
     },
     {
@@ -25895,13 +26001,13 @@ const DB = {
     {
       "relic": "Brimstone",
       "card": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Brimstone gives +2 Strength per turn — Whirlwind hits X times. With Brimstone stacking Strength every turn, each Whirlwind hit deals progressively more damage."
     },
     {
       "relic": "Brimstone",
       "card": "Thrash",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Brimstone gives +2 Strength per turn — Thrash hits multiple times. Each Thrash benefits from Strength on every hit, and Brimstone passively amplifies this every turn."
     },
     {
@@ -25913,7 +26019,7 @@ const DB = {
     {
       "relic": "Ruined Helmet",
       "card": "Demon Form",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Ruined Helmet doubles first Strength gain per combat — Demon Form gives Strength every turn. If Demon Form is the first source, Ruined Helmet doubles the turn 2 Strength gain for a massive early spike."
     },
     {
@@ -25925,7 +26031,7 @@ const DB = {
     {
       "relic": "Paper Phrog",
       "card": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Paper Phrog makes Vulnerable enemies take 75% more damage (not 50%) — Whirlwind hits X times. Each hit applies the enhanced Vulnerable multiplier, turning Whirlwind into a massive damage spike."
     },
     {
@@ -25949,7 +26055,7 @@ const DB = {
     {
       "relic": "Demon Tongue",
       "card": "Bloodletting",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Bloodletting costs 3 HP — Demon Tongue heals the first HP you lose per turn. Demon Tongue makes Bloodletting effectively free once per turn, removing its HP cost entirely."
     },
     {
@@ -25979,7 +26085,7 @@ const DB = {
     {
       "relic": "Strike Dummy",
       "card": "Twin Strike",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Strike Dummy gives +3 to Strike cards — Twin Strike hits twice. Twin Strike gets +6 total from Strike Dummy (3 per hit), making it hit for 16 damage instead of 10."
     },
     {
@@ -25997,19 +26103,19 @@ const DB = {
     {
       "relic": "Ninja Scroll",
       "card": "Finisher",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Ninja Scroll adds 3 free Shivs at combat start — Finisher deals 4 damage per Attack played this turn. Starting with 3 Shivs guarantees Finisher hits for at least 12 bonus damage on Turn 1."
     },
     {
       "relic": "Ninja Scroll",
       "card": "Knife Trap",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Ninja Scroll gives 3 Shivs to start — Knife Trap then fires 10-20 more Shivs. The 3 starting Shivs don't directly fuel Knife Trap but set up the board for immediate Shiv synergies."
     },
     {
       "relic": "Helical Dart",
       "card": "Knife Trap",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Knife Trap fires 10-20 Shivs in one turn — Helical Dart gives +1 Dexterity per Shiv played this turn. During Knife Trap, 15 Shivs give +15 Dexterity this turn, making all Block cards enormous."
     },
     {
@@ -26045,7 +26151,7 @@ const DB = {
     {
       "relic": "Tingsha",
       "card": "Calculated Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Calculated Gamble discards entire hand — Tingsha deals 3 damage per discarded card. Discarding 5 cards with Calculated Gamble triggers 15 damage from Tingsha in one play."
     },
     {
@@ -26057,7 +26163,7 @@ const DB = {
     {
       "relic": "Tough Bandages",
       "card": "Calculated Gamble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Calculated Gamble discards entire hand — Tough Bandages gives 3 Block per discarded card. Discarding 5 cards gives 15 free Block from one Calculated Gamble."
     },
     {
@@ -26075,13 +26181,13 @@ const DB = {
     {
       "relic": "Snecko Skull",
       "card": "Noxious Fumes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Noxious Fumes applies 2 Poison to all enemies each turn — Snecko Skull adds +1 Poison per application. Noxious Fumes now applies 3 Poison per turn to all enemies passively."
     },
     {
       "relic": "Snecko Skull",
       "card": "Deadly Poison",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Deadly Poison applies 5 Poison — Snecko Skull adds +1 per application, so it applies 6 Poison. Every Deadly Poison with Snecko Skull stacks Poison 20% faster."
     },
     {
@@ -26099,7 +26205,7 @@ const DB = {
     {
       "relic": "Twisted Funnel",
       "card": "Bubble Bubble",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Twisted Funnel applies 4 Poison to ALL enemies at combat start — Bubble Bubble doubles existing Poison. Starting with 4 Poison from Twisted Funnel means Bubble Bubble immediately doubles to 8 on Turn 1."
     },
     {
@@ -26111,31 +26217,31 @@ const DB = {
     {
       "relic": "Unsettling Lamp",
       "card": "Deadly Poison",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Deadly Poison applies 5 Poison — Unsettling Lamp doubles the first debuff effect per combat. The first Deadly Poison applies 10 Poison instead of 5."
     },
     {
       "relic": "Unsettling Lamp",
       "card": "Noxious Fumes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Noxious Fumes applies Poison passively — Unsettling Lamp doubles first debuff per combat. First Noxious Fumes activation applies double Poison to all enemies."
     },
     {
       "relic": "Unsettling Lamp",
       "card": "Deathbringer",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Deathbringer applies AoE Doom — Unsettling Lamp doubles first debuff. First Deathbringer applies double Doom to all enemies, reaching the execute threshold much faster."
     },
     {
       "relic": "Lunar Pastry",
       "card": "Alignment",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Alignment converts Stars into Energy — Lunar Pastry generates 1 Star at end of every turn. With Lunar Pastry passively accumulating Stars, Alignment has consistent Stars to convert into Energy every turn."
     },
     {
       "relic": "Lunar Pastry",
       "card": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Lunar Pastry generates Stars every turn — Seven Stars costs 7 Stars and hits 49 times. Lunar Pastry gradually pays toward Seven Stars' Star cost, making it more consistently playable."
     },
     {
@@ -26177,7 +26283,7 @@ const DB = {
     {
       "relic": "Fencing Manual",
       "card": "Conqueror",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Fencing Manual starts with Forge 10 — Conqueror doubles current Forge. Starting at Forge 10 instead of 0 means Conqueror immediately doubles to 20, shortcutting the Forge buildup phase."
     },
     {
@@ -26207,7 +26313,7 @@ const DB = {
     {
       "relic": "Funerary Mask",
       "card": "Death March",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Funerary Mask adds 3 Souls to Draw Pile — Death March scales with cards drawn this turn. Drawing 3 Souls from Funerary Mask adds 9 bonus damage to Death March in the turn you draw them."
     },
     {
@@ -26225,7 +26331,7 @@ const DB = {
     {
       "relic": "Undying Sigil",
       "card": "End of Days",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "End of Days executes all enemies at or below Doom count — Undying Sigil makes enemies at Doom threshold deal 50% less damage. As enemies approach the execution threshold, they deal half damage, protecting you until End of Days goes off."
     },
     {
@@ -26267,7 +26373,7 @@ const DB = {
     {
       "relic": "Bone Flute",
       "card": "Rattle",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Rattle hits X times based on Osty attacks used this turn — Bone Flute gains 2 Block per Osty attack. Both scale with Osty attack count, so a Rattle-heavy turn simultaneously scales damage AND generates massive Block from Bone Flute."
     },
     {
@@ -26297,25 +26403,25 @@ const DB = {
     {
       "relic": "Data Disk",
       "card": "Tesla Coil",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Tesla Coil scales with Focus — Data Disk gives +1 Focus. Each Focus point from Data Disk directly amplifies Tesla Coil's damage output every time it triggers."
     },
     {
       "relic": "Data Disk",
       "card": "Loop",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Loop permanently gives a chosen Orb a free Evoke — Data Disk gives Focus making all Orb passives stronger. The Looped Orb's passive is directly amplified by every Focus point from Data Disk."
     },
     {
       "relic": "Gold-Plated Cables",
       "card": "Defragment",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Defragment gives +1 Focus per play — Gold-Plated Cables makes rightmost Orb trigger passive twice. Each Focus from Defragment amplifies the bonus trigger from Gold-Plated Cables."
     },
     {
       "relic": "Gold-Plated Cables",
       "card": "Loop",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Loop gives a chosen Orb a free Evoke — Gold-Plated Cables also gives rightmost Orb an extra passive trigger. If the Looped Orb is the rightmost, it fires three times instead of once per turn."
     },
     {
@@ -26327,7 +26433,7 @@ const DB = {
     {
       "relic": "Runic Capacitor",
       "card": "Capacitor",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Capacitor adds 2 extra Orb Slots — Runic Capacitor already gives +3 Orb Slots. Together they give 5 extra Orb Slots for 8 total, enabling enormous Orb queues and massive passive damage/healing."
     },
     {
@@ -26381,7 +26487,7 @@ const DB = {
     {
       "relic": "Power Cell",
       "card": "All for One",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Power Cell adds 2 zero-cost cards to opening Hand — All for One retrieves all zero-cost Discard cards. Power Cell guarantees zero-cost cards start in Hand, and All for One later refills them from Discard."
     },
     {
@@ -26393,31 +26499,31 @@ const DB = {
     {
       "relic": "Iron Club",
       "card": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Iron Club draws 1 card every 4 cards played — Claw builds play 10+ cards per turn. With Iron Club, every 4 Claws drawn is also 1 extra draw, fueling further Claw plays."
     },
     {
       "relic": "Iron Club",
       "card": "All for One",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Iron Club draws every 4 cards played — All for One retrieves all zero-cost Discard cards. After All for One floods your hand with Claws, Iron Club's draw triggers fire rapidly as you play them all."
     },
     {
       "relic": "Nunchaku",
       "card": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Claw is a zero-cost attack — Nunchaku gains Energy every 10 Attacks. In Claw builds playing 10-15 Claws per turn, Nunchaku fires 1-2 free Energy every turn."
     },
     {
       "relic": "Shuriken",
       "card": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shuriken gives +1 permanent Strength every 3 Attacks — Claw builds play 10-15 attacks per turn. Claw builds consistently trigger Shuriken 3-5 times per turn for 3-5 permanent Strength."
     },
     {
       "relic": "Kunai",
       "card": "Claw",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Kunai gives +1 Dexterity every 3 Attacks — Claw builds play 10-15 attacks per turn. Claw builds trigger Kunai 3-5 times per turn for 3-5 permanent Dexterity."
     },
     {
@@ -26429,7 +26535,7 @@ const DB = {
     {
       "relic": "History Course",
       "card": "Noxious Fumes",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "History Course plays a copy of your last Attack or Skill each turn — Noxious Fumes is a Skill applying Poison. If Noxious Fumes was your last Skill, History Course automatically doubles Poison application every turn for free."
     },
     {
@@ -26441,7 +26547,7 @@ const DB = {
     {
       "relic": "History Course",
       "card": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "History Course replays last Attack or Skill — Whirlwind hits X times. If Whirlwind was last, History Course automatically replays an X-cost Whirlwind the next turn for free AoE."
     },
     {
@@ -26459,7 +26565,7 @@ const DB = {
     {
       "relic": "Ghost Seed",
       "card": "Tactician",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Ghost Seed gives Strikes and Defends Ethereal — they auto-discard. If Tactician is in hand alongside Strikes/Defends, the auto-discards trigger Sly. Ghost Seed accelerates Sly triggers by auto-discarding dead cards."
     },
     {
@@ -26471,7 +26577,7 @@ const DB = {
     {
       "relic": "Razor Tooth",
       "card": "Whirlwind",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Razor Tooth upgrades every Attack and Skill played this combat — Whirlwind hits X times. Upgraded Whirlwind hits for more per swing. With Razor Tooth, Whirlwind is upgraded the moment it's played."
     },
     {
@@ -26495,13 +26601,13 @@ const DB = {
     {
       "relic": "Frozen Egg",
       "card": "Defragment",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Frozen Egg auto-upgrades every Power added to deck — Defragment upgraded gives 2 Focus instead of 1. Every Defragment picked up is immediately upgraded, halving the setup time for maximum Focus."
     },
     {
       "relic": "Frozen Egg",
       "card": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Frozen Egg auto-upgrades every Power — Corruption upgraded makes Skills cost 0 instead of just reducing cost. Every Corruption picked up is immediately upgraded to its full power."
     },
     {
@@ -26513,7 +26619,7 @@ const DB = {
     {
       "relic": "Toxic Egg",
       "card": "Corruption",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Toxic Egg auto-upgrades every Skill added — Corruption is a Skill. With Toxic Egg, every Corruption picked up is immediately Upgraded to give 0-cost Skills instead of reduced-cost."
     },
     {
@@ -26525,13 +26631,13 @@ const DB = {
     {
       "relic": "Unsettling Lamp",
       "card": "Putrefy",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Putrefy applies 2 Weak and 2 Vulnerable — Unsettling Lamp doubles the first debuff per combat. The first Putrefy applies 4 Weak and 4 Vulnerable instead of 2 each, setting up a massive damage amplification turn."
     },
     {
       "relic": "Unsettling Lamp",
       "card": "Shockwave",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Shockwave applies 3 Weak and 3 Vulnerable to ALL enemies — Unsettling Lamp doubles first debuff. First Shockwave applies 6 Weak and 6 Vulnerable AoE instead of 3 each."
     },
     {
@@ -26555,13 +26661,13 @@ const DB = {
     {
       "relic": "Ice Cream",
       "card": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Seven Stars costs 7 Stars — Ice Cream conserves unused Energy between turns. With Ice Cream, unused Energy from turns 1-2 carries over to enable playing Seven Stars alongside other cards on the same turn."
     },
     {
       "relic": "Ice Cream",
       "card": "Multi-Cast",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Multi-Cast costs X Energy — Ice Cream conserves unused Energy between turns. Carrying over 1-2 Energy from previous turns enables a much larger Multi-Cast X value on the key turn."
     },
     {
@@ -26573,7 +26679,7 @@ const DB = {
     {
       "relic": "Very Hot Cocoa",
       "card": "Seven Stars",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Very Hot Cocoa gives +4 Energy per combat start — Seven Stars costs 7 Stars and is expensive. Starting every combat with 7 Energy means Seven Stars can be played immediately on Turn 1."
     },
     {
@@ -26585,7 +26691,7 @@ const DB = {
     {
       "relic": "Lost Wisp",
       "card": "Defragment",
-      "bonus": 2.0,
+      "bonus": 2,
       "reason": "Defragment is a Power that gives +1 Focus — Lost Wisp deals 8 AoE every time you play a Power. Each Defragment play triggers Lost Wisp for 8 free AoE on top of its Focus gain."
     },
     {
